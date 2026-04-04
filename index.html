@@ -202,29 +202,21 @@
     .hero-slides { display: flex; width: 300%; height: 100%; transition: transform 0.6s ease; }
     .hero-slide {
       width: 33.333%; height: 100%;
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .hero-slide-left {
+      background: var(--teal-dark);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 60px;
+    }
+    .hero-slide-right {
       position: relative; overflow: hidden;
-      display: flex; align-items: center;
     }
-    .hero-slide-bg {
-      position: absolute; inset: 0;
-      background: linear-gradient(105deg, rgba(7,44,56,0.82) 38%, rgba(2,110,112,0.3) 100%);
-      z-index: 1;
+    .hero-slide-right img {
+      width: 100%; height: 100%; object-fit: cover;
     }
-    .hero-slide-img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-    }
-    .hero-photos {
-      position: absolute; inset: 0; z-index: 0;
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
-    }
-    .hero-photo-block { background: var(--navy); overflow: hidden; }
-    .hero-photo-block:nth-child(1) { background: #1a4a5a; }
-    .hero-photo-block:nth-child(2) { background: #0d3545; }
-    .hero-photo-block:nth-child(3) { background: #1e5060; }
     .hero-content {
-      position: relative; z-index: 2;
-      padding: 0 60px; max-width: 640px;
+      padding: 0;
     }
     .hero-tag {
       display: inline-block;
@@ -281,8 +273,14 @@
     .hero-arrow.next { right: 20px; }
 
     /* ── SHORTCUT BAR ── */
+    .shortcut-wrapper {
+      background: white;
+      padding: 20px 16px 0;
+    }
     .shortcut-section {
       background: var(--teal-dark); padding: 24px 40px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 4px 20px rgba(2,110,112,0.18);
     }
     .shortcut-title {
       font-family: var(--font-head); font-size: 13px; font-weight: 700;
@@ -649,56 +647,53 @@
   <div class="hero-slides" id="heroSlides">
     <!-- Slide 1 -->
     <div class="hero-slide">
-      <div class="hero-photos">
-        <div class="hero-photo-block" style="background-image:url('img/care-without-borders.png');background-size:cover;background-position:left center;"></div>
-        <div class="hero-photo-block" style="background-image:url('img/care-without-borders.png');background-size:cover;background-position:center center;"></div>
-        <div class="hero-photo-block" style="background-image:url('img/care-without-borders.png');background-size:cover;background-position:right center;"></div>
-      </div>
-      <div class="hero-slide-bg"></div>
-      <div class="hero-content">
-        <div class="hero-tag">Serving Greater Seattle Since 1973</div>
-        <h1 class="hero-title">Care Without Borders.<br><span>Quality Without Barriers.</span></h1>
-        <p class="hero-sub">Serving diverse communities across the Greater Seattle area with equitable, compassionate care.</p>
-        <div class="hero-btns">
-          <a class="btn btn-primary" href="#">Make an Appointment</a>
-          <a class="btn btn-outline-white" href="#">Learn More →</a>
+      <div class="hero-slide-left">
+        <div class="hero-content">
+          <div class="hero-tag">Serving Greater Seattle Since 1973</div>
+          <h1 class="hero-title">Care Without Borders.<br><span>Quality Without Barriers.</span></h1>
+          <p class="hero-sub">Serving diverse communities across the Greater Seattle area with equitable, compassionate care.</p>
+          <div class="hero-btns">
+            <a class="btn btn-primary" href="#">Make an Appointment</a>
+            <a class="btn btn-outline-white" href="#">Learn More →</a>
+          </div>
         </div>
+      </div>
+      <div class="hero-slide-right">
+        <img src="img/care-without-borders.png" alt="Care Without Borders">
       </div>
     </div>
     <!-- Slide 2 -->
     <div class="hero-slide">
-      <div class="hero-photos">
-        <div class="hero-photo-block" style="background-image:url('img/multilingual.png');background-size:cover;background-position:left center;"></div>
-        <div class="hero-photo-block" style="background-image:url('img/multilingual.png');background-size:cover;background-position:left center;"></div>
-        <div class="hero-photo-block" style="background-image:url('img/multilingual.png');background-size:cover;background-position:left center;"></div>
-      </div>
-      <div class="hero-slide-bg"></div>
-      <div class="hero-content">
-        <div class="hero-tag">Multilingual · Multicultural</div>
-        <h1 class="hero-title">Healthcare in<br><span>Your Language.</span></h1>
-        <p class="hero-sub">We provide care in over 12 languages, ensuring every patient feels heard, understood, and respected.</p>
-        <div class="hero-btns">
-          <a class="btn btn-primary" href="services.html">Our Services</a>
-          <a class="btn btn-outline-white" href="providers.html">Find a Provider →</a>
+      <div class="hero-slide-left">
+        <div class="hero-content">
+          <div class="hero-tag">Multilingual · Multicultural</div>
+          <h1 class="hero-title">Healthcare in<br><span>Your Language.</span></h1>
+          <p class="hero-sub">We provide care in over 12 languages, ensuring every patient feels heard, understood, and respected.</p>
+          <div class="hero-btns">
+            <a class="btn btn-primary" href="services.html">Our Services</a>
+            <a class="btn btn-outline-white" href="providers.html">Find a Provider →</a>
+          </div>
         </div>
+      </div>
+      <div class="hero-slide-right">
+        <img src="img/multilingual.png" alt="Multilingual Care">
       </div>
     </div>
     <!-- Slide 3 -->
     <div class="hero-slide">
-      <div class="hero-photos">
-        <div class="hero-photo-block" style="background-image:url('img/community-rooted.png');background-size:cover;background-position:left center;"></div>
-        <div class="hero-photo-block" style="background-image:url('img/community-rooted.png');background-size:cover;background-position:center center;"></div>
-        <div class="hero-photo-block" style="background-image:url('img/community-rooted.png');background-size:cover;background-position:right center;"></div>
-      </div>
-      <div class="hero-slide-bg"></div>
-      <div class="hero-content">
-        <div class="hero-tag">Community Rooted · Health Focused</div>
-        <h1 class="hero-title">Your Community.<br><span>Your Health Home.</span></h1>
-        <p class="hero-sub">From primary care to behavioral health, we provide comprehensive, affordable care for every stage of life.</p>
-        <div class="hero-btns">
-          <a class="btn btn-primary" href="location.html">Find a Location</a>
-          <a class="btn btn-outline-white" href="#">Support Us →</a>
+      <div class="hero-slide-left">
+        <div class="hero-content">
+          <div class="hero-tag">Community Rooted · Health Focused</div>
+          <h1 class="hero-title">Your Community.<br><span>Your Health Home.</span></h1>
+          <p class="hero-sub">From primary care to behavioral health, we provide comprehensive, affordable care for every stage of life.</p>
+          <div class="hero-btns">
+            <a class="btn btn-primary" href="location.html">Find a Location</a>
+            <a class="btn btn-outline-white" href="#">Support Us →</a>
+          </div>
         </div>
+      </div>
+      <div class="hero-slide-right">
+        <img src="img/community-rooted.png" alt="Community Rooted">
       </div>
     </div>
   </div>
@@ -715,8 +710,8 @@
 <!-- ══════════════════════════════════════════
      SHORTCUT BAR
 ══════════════════════════════════════════ -->
+<div class="shortcut-wrapper">
 <div class="shortcut-section">
-  <div style="max-width:1180px; margin:0 auto;">
     <div class="shortcut-title">Shortcut For Patients</div>
     <div class="shortcut-grid">
       <div class="shortcut-btn">
@@ -742,7 +737,7 @@
         <span>Billing</span>
       </div>
     </div>
-  </div>
+</div>
 </div>
 
 
