@@ -387,7 +387,7 @@
     </div>
     <div class="filter-bar">
       <label class="filter-check">
-        <input type="checkbox" id="filterGeneral" checked onchange="filterServices()"/>
+        <input type="checkbox" id="filterGeneral" onchange="filterServices()"/>
         <div class="check-box"></div>
         General &amp; Urgent Care
       </label>
@@ -449,7 +449,7 @@
   </div>
 
   <!-- Specialized Care -->
-  <div class="service-category" id="cat-specialized" style="display:none;">
+  <div class="service-category" id="cat-specialized">
     <div class="category-title">Specialized Care</div>
     <div class="service-grid">
       
@@ -493,7 +493,7 @@
   </div>
 
   <!-- Wellness & Community Support -->
-  <div class="service-category" id="cat-wellness" style="display:none;">
+  <div class="service-category" id="cat-wellness">
     <div class="category-title">Wellness &amp; Community Support</div>
     <div class="service-grid">
       
@@ -696,11 +696,11 @@
         <div class="sidebar-section-title">Services</div>
 
         <div class="sidebar-group">
-          <div class="sidebar-group-label active open" onclick="toggleSidebarGroup(this)">
+          <div class="sidebar-group-label" onclick="toggleSidebarGroup(this)">
             General &amp; Urgent Care <span class="arrow">▼</span>
           </div>
-          <div class="sidebar-items open">
-            <a class="sidebar-item active" onclick="showDetail('Primary_Care')">Primary Care</a>
+          <div class="sidebar-items">
+            <a class="sidebar-item" onclick="showDetail('Primary_Care')">Primary Care</a>
             <a class="sidebar-item" onclick="showDetail('Dental_Care')">Dental Care</a>
             <a class="sidebar-item" onclick="showDetail('After_Hours_Clinic')">After Hour</a>
             <a class="sidebar-item" onclick="showDetail('Pharmacy')">Pharmacy</a>
@@ -915,6 +915,8 @@
 
     // Update sidebar active state
     document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.sidebar-group-label').forEach(el => el.classList.remove('active', 'open'));
+    document.querySelectorAll('.sidebar-items').forEach(el => el.classList.remove('open'));
     const match = [...document.querySelectorAll('.sidebar-item')]
       .find(el => el.textContent.trim().replace(/\s+/g,' ') === svc.name.replace(/\s+/g,' '));
     if (match) {
