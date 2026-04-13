@@ -246,7 +246,7 @@
     .prov-detail svg { width:12px; height:12px; stroke:var(--teal-dark); fill:none; stroke-width:2; flex-shrink:0; }
 
     /* Clinic Services grid */
-    .clinic-svc-section { background:var(--teal-dark); padding:52px 40px; }
+    .clinic-svc-section { background:var(--navy); padding:52px 40px; }
     .clinic-svc-section h2 { font-family:var(--font-head); font-size:24px; font-weight:700; color:white; text-align:center; margin-bottom:28px; }
     .clinic-svc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
     .clinic-svc-card { background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.2); border-radius:var(--radius-md); overflow:hidden; }
@@ -325,15 +325,15 @@
     </div>
     <div class="nav-item"><a href="services.html">Services</a> <span class="drop-arrow">▼</span>
       <div class="mega-drop">
-        <div class="mega-col"><h6>General</h6><ul><li>Primary Care</li><li>Dental Care</li><li>After Hours Clinic</li><li>Eye Care</li></ul></div>
-        <div class="mega-col"><h6>Specialized</h6><ul><li>Behavioral Health</li><li>Pregnancy Care</li><li>Geriatric Care</li></ul></div>
-        <div class="mega-col"><h6>Wellness</h6><ul><li>Healthy Aging</li><li>Nutrition Services</li><li>Acupuncture</li></ul></div>
+        <div class="mega-col"><h6>General</h6><ul><li><a href="services.html#Primary_Care">Primary Care</a></li><li><a href="services.html#Dental_Care">Dental Care</a></li><li><a href="services.html#After_Hours_Clinic">After Hours Clinic</a></li><li><a href="services.html#Eye_Care">Eye Care</a></li></ul></div>
+        <div class="mega-col"><h6>Specialized</h6><ul><li><a href="services.html#Behavioral_Health">Behavioral Health</a></li><li><a href="services.html#Pregnancy_Care">Pregnancy Care</a></li><li><a href="services.html#Geriatric_Care">Geriatric Care</a></li></ul></div>
+        <div class="mega-col"><h6>Wellness</h6><ul><li><a href="services.html#Healthy_Aging_and_Wellness">Healthy Aging</a></li><li><a href="services.html#Nutrition_Services">Nutrition Services</a></li><li><a href="services.html#Acupuncture">Acupuncture</a></li></ul></div>
       </div>
     </div>
     <div class="nav-item active"><a href="location.html">Location</a> <span class="drop-arrow">▼</span>
       <div class="mega-drop" style="min-width:440px;">
-        <div class="mega-col"><h6>Medical &amp; Dental</h6><ul><li>International District</li><li>Holly Park</li><li>Shoreline</li><li>Bellevue</li></ul></div>
-        <div class="mega-col"><h6>Community Sites</h6><ul><li>Seattle World School</li><li>Mobile Medical Clinic</li></ul></div>
+        <div class="mega-col"><h6>Medical &amp; Dental</h6><ul><li><a href="location.html#intl-district">International District</a></li><li><a href="location.html#holly-park">Holly Park</a></li><li><a href="location.html#shoreline">Shoreline</a></li><li><a href="location.html#bellevue">Bellevue</a></li></ul></div>
+        <div class="mega-col"><h6>Community Sites</h6><ul><li><a href="location.html#seattle-world-school">Seattle World School</a></li><li><a href="location.html#mobile-medical">Mobile Medical Clinic</a></li></ul></div>
       </div>
     </div>
     <div class="nav-item"><a href="providers.html">Find a Provider</a></div>
@@ -873,9 +873,14 @@
       <div class="mega-drop"><div class="mega-col"><h6>Current Patients</h6><ul><li>Make an Appointment</li><li>Telehealth</li><li>Sign Up for MyChart</li><li>After Hours Care</li></ul></div><div class="mega-col"><h6>Paying for Care</h6><ul><li>Billing</li><li>Insurance Assistance</li><li>Sliding Scale Discount</li></ul></div></div>
     </div>
     <div class="nav-item">Services <span class="drop-arrow">▼</span>
-      <div class="mega-drop"><div class="mega-col"><h6>General</h6><ul><li>Primary Care</li><li>Dental Care</li><li>After Hours Clinic</li><li>Eye Care</li></ul></div><div class="mega-col"><h6>Specialized Care</h6><ul><li>Behavioral Health</li><li>Pregnancy Care</li></ul></div></div>
+      <div class="mega-drop"><div class="mega-col"><h6>General</h6><ul><li><a href="services.html#Primary_Care">Primary Care</a></li><li><a href="services.html#Dental_Care">Dental Care</a></li><li><a href="services.html#After_Hours_Clinic">After Hours Clinic</a></li><li><a href="services.html#Eye_Care">Eye Care</a></li></ul></div><div class="mega-col"><h6>Specialized Care</h6><ul><li><a href="services.html#Behavioral_Health">Behavioral Health</a></li><li><a href="services.html#Pregnancy_Care">Pregnancy Care</a></li></ul></div></div>
     </div>
-    <div class="nav-item" onclick="showPage('locations')" style="color:var(--teal-dark); border-bottom-color:var(--teal-dark);">Location</div>
+    <div class="nav-item active" style="color:var(--teal-dark); border-bottom-color:var(--teal-dark);"><a href="location.html">Location</a> <span class="drop-arrow">▼</span>
+      <div class="mega-drop" style="min-width:440px;">
+        <div class="mega-col"><h6>Medical &amp; Dental</h6><ul><li><a href="location.html#intl-district">International District</a></li><li><a href="location.html#holly-park">Holly Park</a></li><li><a href="location.html#shoreline">Shoreline</a></li><li><a href="location.html#bellevue">Bellevue</a></li></ul></div>
+        <div class="mega-col"><h6>Community Sites</h6><ul><li><a href="location.html#seattle-world-school">Seattle World School</a></li><li><a href="location.html#mobile-medical">Mobile Medical Clinic</a></li></ul></div>
+      </div>
+    </div>
     <div class="nav-item">Find a Provider</div>
     <div class="nav-item">About <span class="drop-arrow">▼</span>
       <div class="mega-drop"><div class="mega-col"><h6>Our Organization</h6><ul><li>Mission &amp; History</li><li>Leadership</li><li>Newsroom</li><li>Contact Us</li></ul></div></div>
@@ -1121,7 +1126,6 @@
     <h2>Clinic Departments</h2>
     <div class="clinic-svc-grid">
     <div class="clinic-svc-card">
-      <div class="clinic-svc-photo"><svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="6"/><path d="M50 35v30M35 50h30"/></svg></div>
       <div class="clinic-svc-info">
         <div class="clinic-svc-name">Medical Clinic</div>
         <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3700</div>
@@ -1130,7 +1134,6 @@
     </div>
 
     <div class="clinic-svc-card">
-      <div class="clinic-svc-photo"><svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="6"/><path d="M50 35v30M35 50h30"/></svg></div>
       <div class="clinic-svc-info">
         <div class="clinic-svc-name">Dental Clinic</div>
         <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3757</div>
@@ -1139,7 +1142,6 @@
     </div>
 
     <div class="clinic-svc-card">
-      <div class="clinic-svc-photo"><svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="6"/><path d="M50 35v30M35 50h30"/></svg></div>
       <div class="clinic-svc-info">
         <div class="clinic-svc-name">Vision Clinic</div>
         <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3505</div>
@@ -1148,7 +1150,6 @@
     </div>
 
     <div class="clinic-svc-card">
-      <div class="clinic-svc-photo"><svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="6"/><path d="M50 35v30M35 50h30"/></svg></div>
       <div class="clinic-svc-info">
         <div class="clinic-svc-name">Acupuncture</div>
         <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3700</div>
@@ -1157,7 +1158,6 @@
     </div>
 
     <div class="clinic-svc-card">
-      <div class="clinic-svc-photo"><svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="6"/><path d="M50 35v30M35 50h30"/></svg></div>
       <div class="clinic-svc-info">
         <div class="clinic-svc-name">Nutrition</div>
         <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3701</div>
@@ -1166,7 +1166,6 @@
     </div>
 
     <div class="clinic-svc-card">
-      <div class="clinic-svc-photo"><svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="6"/><path d="M50 35v30M35 50h30"/></svg></div>
       <div class="clinic-svc-info">
         <div class="clinic-svc-name">Women, Infants & Children (WIC)</div>
         <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3701</div>
@@ -1175,7 +1174,6 @@
     </div>
 
     <div class="clinic-svc-card">
-      <div class="clinic-svc-photo"><svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="6"/><path d="M50 35v30M35 50h30"/></svg></div>
       <div class="clinic-svc-info">
         <div class="clinic-svc-name">Pharmacy</div>
         <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3770</div>
@@ -1340,6 +1338,14 @@
     });
   }
   document.addEventListener('click', () => document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('open')));
+
+  // ── DEEP LINK via URL hash ──
+  (function() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && LOC_DATA[hash]) {
+      showDetail(hash);
+    }
+  })();
 </script>
 </body>
 </html>
