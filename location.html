@@ -81,31 +81,36 @@
        LOCATIONS FINDER PAGE
     ═══════════════════════════════ */
     .loc-hero { background:var(--teal-dark); padding:48px 40px; text-align:center; }
-    .loc-hero h1 { font-family:var(--font-head); font-size:36px; font-weight:700; color:white; margin-bottom:20px; }
-    .loc-search-bar { display:flex; align-items:center; background:white; border-radius:40px; padding:12px 22px; gap:10px; max-width:600px; margin:0 auto; box-shadow:0 4px 20px rgba(0,0,0,0.15); }
+    .loc-hero h1 { font-family:var(--font-head); font-size:36px; font-weight:700; color:white; margin-bottom:8px; }
+    .loc-hero p { font-size:14px; color:rgba(255,255,255,0.75); line-height:1.7; margin-bottom:24px; }
+    .loc-search-row { display:flex; align-items:center; gap:12px; max-width:720px; margin:0 auto; }
+    .loc-search-bar { display:flex; align-items:center; background:white; border-radius:40px; padding:12px 22px; gap:10px; flex:1; box-shadow:0 4px 20px rgba(0,0,0,0.15); }
     .loc-search-bar svg { width:18px; height:18px; stroke:var(--muted); fill:none; stroke-width:2; flex-shrink:0; }
     .loc-search-bar input { border:none; outline:none; font-family:var(--font-body); font-size:15px; color:var(--ink); flex:1; }
     .loc-search-bar input::placeholder { color:var(--muted); }
 
-    .loc-body { display:grid; grid-template-columns:260px 1fr; min-height:80vh; }
-
-    /* Filters sidebar */
-    .loc-filters { background:white; border-right:1px solid rgba(0,0,0,0.07); padding:28px 0; }
-    .filter-top { display:flex; align-items:center; justify-content:space-between; padding:0 20px 16px; border-bottom:1px solid rgba(0,0,0,0.06); margin-bottom:16px; }
-    .filter-top h3 { font-family:var(--font-head); font-size:14px; font-weight:700; color:var(--navy); }
-    .clear-btn { font-family:var(--font-head); font-size:12px; font-weight:700; color:var(--teal-dark); cursor:pointer; }
-    .clear-btn:hover { text-decoration:underline; }
-    .filter-group { padding:0 20px 20px; border-bottom:1px solid rgba(0,0,0,0.06); margin-bottom:16px; }
-    .filter-group:last-child { border-bottom:none; margin-bottom:0; }
-    .filter-group-label { font-family:var(--font-head); font-size:12px; font-weight:700; color:var(--navy); margin-bottom:10px; display:block; }
-    .filter-input { width:100%; padding:9px 12px; border:1.5px solid #d0d8da; border-radius:var(--radius-sm); font-family:var(--font-body); font-size:13px; color:var(--ink); outline:none; transition:border-color .15s; }
-    .filter-input:focus { border-color:var(--teal-dark); }
-    .filter-check-item { display:flex; align-items:center; gap:10px; padding:6px 0; cursor:pointer; }
-    .filter-check-item input[type="checkbox"] { display:none; }
-    .f-check-box { width:18px; height:18px; border:2px solid #c0d0d2; border-radius:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all .15s; }
-    .filter-check-item input:checked + .f-check-box { background:var(--teal-dark); border-color:var(--teal-dark); }
-    .filter-check-item input:checked + .f-check-box::after { content:''; width:5px; height:9px; border:2px solid white; border-top:none; border-left:none; transform:rotate(45deg) translateY(-1px); display:block; }
-    .f-check-label { font-family:var(--font-body); font-size:13px; color:var(--ink); }
+    .loc-body { min-height:60vh; }
+    /* Filter toggle button */
+    .filter-toggle-btn { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.15); border:1.5px solid rgba(255,255,255,0.6); border-radius:40px; padding:10px 22px; font-family:var(--font-head); font-size:14px; font-weight:700; color:white; cursor:pointer; transition:background .15s; }
+    .filter-toggle-btn:hover { background:rgba(255,255,255,0.25); }
+    .filter-toggle-btn .fchev { font-size:10px; transition:transform .2s; margin-left:2px; }
+    .filter-toggle-btn.open .fchev { transform:rotate(180deg); }
+    .filter-active-badge { background:var(--crimson); color:white; border-radius:20px; padding:1px 8px; font-size:11px; font-weight:700; display:none; }
+    .filter-clear-link { font-family:var(--font-head); font-size:13px; font-weight:700; color:rgba(255,255,255,0.85); cursor:pointer; background:none; border:none; text-decoration:underline; display:none; padding:4px; }
+    .filter-clear-link:hover { color:white; }
+    /* Filter panel */
+    .filter-panel { display:none; max-width:720px; margin:16px auto 0; background:white; border-radius:14px; padding:24px 28px 20px; box-shadow:0 8px 32px rgba(7,44,56,0.22); text-align:left; }
+    .filter-panel.open { display:block; }
+    .fp-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px 20px; }
+    .fp-field { display:flex; flex-direction:column; gap:6px; }
+    .fp-label { font-family:var(--font-head); font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; }
+    .fp-select-wrap { position:relative; }
+    .fp-select-wrap select { appearance:none; width:100%; padding:11px 36px 11px 14px; border:1.5px solid #d0d8da; border-radius:8px; background:white; font-family:var(--font-body); font-size:14px; color:var(--ink); cursor:pointer; outline:none; transition:border-color .15s; }
+    .fp-select-wrap select:focus { border-color:var(--teal-dark); box-shadow:0 0 0 3px rgba(2,110,112,0.1); }
+    .fp-select-wrap::after { content:'▾'; position:absolute; right:13px; top:50%; transform:translateY(-50%); font-size:12px; color:var(--muted); pointer-events:none; }
+    .fp-footer { display:flex; justify-content:flex-end; margin-top:20px; padding-top:16px; border-top:1px solid rgba(0,0,0,0.07); }
+    .fp-clear-btn { font-family:var(--font-head); font-size:13px; font-weight:700; color:var(--muted); cursor:pointer; background:none; border:none; padding:8px 16px; border-radius:6px; }
+    .fp-clear-btn:hover { background:var(--teal-light); color:var(--navy); }
 
     /* Location list */
     .loc-list { background:#f8f7f5; padding:28px 32px; }
@@ -122,13 +127,6 @@
     .loc-detail-row { display:flex; align-items:flex-start; gap:7px; margin-bottom:7px; font-size:13px; color:var(--muted); }
     .loc-detail-row svg { width:14px; height:14px; stroke:var(--teal-dark); fill:none; stroke-width:2; flex-shrink:0; margin-top:1px; }
     .loc-detail-row strong { color:var(--ink); }
-    .loc-tty { font-size:12px; color:var(--muted); margin-left:21px; }
-    .loc-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
-    .loc-tag { padding:4px 12px; border-radius:20px; font-family:var(--font-head); font-size:11px; font-weight:700; border:1.5px solid; }
-    .loc-tag-medical { color:var(--teal-dark); border-color:var(--teal-dark); background:var(--teal-light); }
-    .loc-tag-dental { color:#5a4f00; border-color:#c8a800; background:#fff8d0; }
-    .loc-tag-wellness { color:#2d6a00; border-color:#6aaa00; background:#e8f5d0; }
-    .loc-tag-community { color:var(--crimson); border-color:var(--crimson); background:rgba(135,17,57,0.07); }
     .loc-card-actions { display:flex; gap:10px; margin-top:14px; }
     .loc-btn { padding:8px 18px; border-radius:40px; font-family:var(--font-head); font-size:13px; font-weight:700; cursor:pointer; transition:all .15s; border:2px solid; }
     .loc-btn-outline { color:var(--teal-dark); border-color:var(--teal-dark); background:transparent; }
@@ -206,9 +204,18 @@
     .svc-cat-header .cat-icon { width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
     .svc-cat-header .cat-icon svg { width:18px; height:18px; stroke:white; fill:none; stroke-width:1.5; }
     .svc-cat-header h4 { font-family:var(--font-head); font-size:14px; font-weight:700; color:white; }
-    .svc-cat-items { padding:12px 0; }
-    .svc-cat-item { display:flex; align-items:center; justify-content:center; padding:9px 16px; margin:6px 12px; border-radius:40px; border:1.5px solid rgba(2,110,112,0.25); font-family:var(--font-body); font-size:13px; color:var(--teal-dark); cursor:pointer; text-align:center; transition:all .15s; }
-    .svc-cat-item:hover { background:var(--teal-light); border-color:var(--teal-dark); }
+    .svc-cat-items { padding:4px 0; }
+    .svc-cat-item { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding:11px 16px; border-bottom:1px solid rgba(2,110,112,0.1); font-family:var(--font-body); font-size:13px; color:var(--ink); cursor:pointer; transition:background .15s; }
+    .svc-cat-item:last-child { border-bottom:none; }
+    .svc-cat-item:hover { background:var(--teal-light); }
+    .svc-item-body { flex:1; display:flex; flex-direction:column; gap:0; }
+    .svc-item-text { font-family:var(--font-head); font-size:13px; font-weight:600; color:var(--navy); line-height:1.4; }
+    .svc-item-detail { font-size:12px; color:var(--muted); line-height:1.6; max-height:0; overflow:hidden; transition:max-height 0.3s ease, margin-top 0.3s ease; margin-top:0; }
+    .svc-cat-item.open .svc-item-detail { max-height:80px; margin-top:6px; }
+    .svc-item-arrow { font-size:16px; color:var(--muted); transition:transform 0.25s, color 0.15s; flex-shrink:0; padding-top:1px; }
+    .svc-cat-item.open .svc-item-arrow { transform:rotate(90deg); color:var(--teal-dark); }
+    .svc-cat-item:hover .svc-item-text { color:var(--teal-dark); }
+    .svc-cat-item.open { background:rgba(2,110,112,0.03); }
 
     /* Find Providers */
     .find-providers-section { background:var(--teal-light); padding:0 40px 48px; }
@@ -318,7 +325,7 @@
     </div>
     <div class="nav-item"><a href="services.html">Services</a> <span class="drop-arrow">▼</span>
       <div class="mega-drop">
-        <div class="mega-col"><h6>General &amp; Urgent</h6><ul><li>Primary Care</li><li>Dental Care</li><li>After Hours Clinic</li><li>Eye Care</li></ul></div>
+        <div class="mega-col"><h6>General</h6><ul><li>Primary Care</li><li>Dental Care</li><li>After Hours Clinic</li><li>Eye Care</li></ul></div>
         <div class="mega-col"><h6>Specialized</h6><ul><li>Behavioral Health</li><li>Pregnancy Care</li><li>Geriatric Care</li></ul></div>
         <div class="mega-col"><h6>Wellness</h6><ul><li>Healthy Aging</li><li>Nutrition Services</li><li>Acupuncture</li></ul></div>
       </div>
@@ -351,80 +358,80 @@
   <!-- Hero Search -->
   <div class="loc-hero">
     <h1>Find a Location</h1>
-    <div class="loc-search-bar">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="locSearch" placeholder="Search by location name, address, or services" oninput="filterLocations()"/>
+    <p>We have 13 clinics across the greater Seattle area — find the one closest to you.</p>
+    <div class="loc-search-row">
+      <div class="loc-search-bar">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="locSearch" placeholder="Search by location name, address, or services" oninput="filterLocations()"/>
+      </div>
+      <button class="filter-toggle-btn" id="filterToggleBtn" onclick="toggleFilterPanel()" aria-expanded="false" aria-controls="filterPanel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        Filters
+        <span class="filter-active-badge" id="filterBadge"></span>
+        <span class="fchev">▾</span>
+      </button>
+      <button class="filter-clear-link" id="filterClearLink" onclick="clearFilters()">Clear All</button>
+    </div>
+    <div class="filter-panel" id="filterPanel" role="region" aria-label="Filter options">
+      <div class="fp-grid">
+        <div class="fp-field">
+          <label class="fp-label" for="filterSortBy">Sort By</label>
+          <div class="fp-select-wrap">
+            <select id="filterSortBy" onchange="filterLocations()">
+              <option value="default">Default order</option>
+              <option value="az">A to Z (Name)</option>
+              <option value="za">Z to A (Name)</option>
+            </select>
+          </div>
+        </div>
+        <div class="fp-field">
+          <label class="fp-label" for="filterDistance">Distance</label>
+          <div class="fp-select-wrap">
+            <select id="filterDistance" onchange="filterLocations()">
+              <option value="">Any distance</option>
+              <option value="5">Within 5 miles</option>
+              <option value="10">Within 10 miles</option>
+              <option value="20">Within 20 miles</option>
+            </select>
+          </div>
+        </div>
+        <div class="fp-field">
+          <label class="fp-label" for="filterClinicType">Clinic Type</label>
+          <div class="fp-select-wrap">
+            <select id="filterClinicType" onchange="filterLocations()">
+              <option value="">All Types</option>
+              <option value="Medical">Medical</option>
+              <option value="Dental">Dental</option>
+              <option value="Wellness">Healthy Aging &amp; Wellness</option>
+              <option value="Community">Community Site</option>
+            </select>
+          </div>
+        </div>
+        <div class="fp-field">
+          <label class="fp-label" for="filterClinicService">Service</label>
+          <div class="fp-select-wrap">
+            <select id="filterClinicService" onchange="filterLocations()">
+              <option value="">All Services</option>
+              <option value="Primary Care">Primary Care</option>
+              <option value="Dental">Dental</option>
+              <option value="Behavioral Health">Behavioral Health</option>
+              <option value="Pharmacy">Pharmacy</option>
+              <option value="Acupuncture">Acupuncture</option>
+              <option value="WIC">WIC</option>
+              <option value="Vision">Vision / Eye Care</option>
+              <option value="Nutrition">Nutrition Services</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="fp-footer">
+        <button class="fp-clear-btn" onclick="clearFilters()">Clear All Filters</button>
+      </div>
     </div>
   </div>
 
-  <!-- Body: Filters + List -->
+  <!-- Locations List -->
   <div class="loc-body">
-
-    <!-- Filters -->
-    <div class="loc-filters">
-      <div class="filter-top">
-        <h3>Filters</h3>
-        <span class="clear-btn" onclick="clearFilters()">Clear All</span>
-      </div>
-
-      <div class="filter-group">
-        <span class="filter-group-label">Sort List</span>
-        <select class="filter-input" onchange="filterLocations()">
-          <option>Closest first</option>
-          <option>A–Z by name</option>
-          <option>Z–A by name</option>
-        </select>
-      </div>
-
-      <div class="filter-group">
-        <span class="filter-group-label">Distance</span>
-        <select class="filter-input" onchange="filterLocations()">
-          <option>Any distance</option>
-          <option>Within 5 miles</option>
-          <option>Within 10 miles</option>
-          <option>Within 20 miles</option>
-        </select>
-      </div>
-
-      <div class="filter-group">
-        <span class="filter-group-label">Clinic Type</span>
-        <label class="filter-check-item">
-          <input type="checkbox" value="Medical" onchange="filterLocations()" checked/>
-          <div class="f-check-box"></div>
-          <span class="f-check-label">Medical</span>
-        </label>
-        <label class="filter-check-item">
-          <input type="checkbox" value="Dental" onchange="filterLocations()"/>
-          <div class="f-check-box"></div>
-          <span class="f-check-label">Dental</span>
-        </label>
-        <label class="filter-check-item">
-          <input type="checkbox" value="Wellness" onchange="filterLocations()"/>
-          <div class="f-check-box"></div>
-          <span class="f-check-label">Healthy Aging & Wellness</span>
-        </label>
-        <label class="filter-check-item">
-          <input type="checkbox" value="Community" onchange="filterLocations()"/>
-          <div class="f-check-box"></div>
-          <span class="f-check-label">Community Site</span>
-        </label>
-      </div>
-
-      <div class="filter-group">
-        <span class="filter-group-label">Clinic Service</span>
-        <select class="filter-input" onchange="filterLocations()">
-          <option value="">All services</option>
-          <option>Primary Care</option>
-          <option>Dental</option>
-          <option>Behavioral Health</option>
-          <option>Pharmacy</option>
-          <option>Acupuncture</option>
-          <option>WIC</option>
-          <option>Vision / Eye Care</option>
-          <option>Nutrition Services</option>
-        </select>
-      </div>
-    </div>
 
     <!-- List -->
     <div class="loc-list" id="locList">
@@ -452,10 +459,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>Mon–Sat: 8am–5pm</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-medical">Medical</span><span class="loc-tag loc-tag-dental">Dental</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('intl-district')">View Location</a>
@@ -481,10 +484,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>Mon–Sat: 8am–5pm</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-medical">Medical</span><span class="loc-tag loc-tag-dental">Dental</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('holly-park')">View Location</a>
@@ -510,10 +509,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>Mon–Fri: 8am–5pm</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-medical">Medical</span><span class="loc-tag loc-tag-dental">Dental</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('shoreline')">View Location</a>
@@ -539,10 +534,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>Mon–Fri: 8am–5pm</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-medical">Medical</span><span class="loc-tag loc-tag-dental">Dental</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('bellevue')">View Location</a>
@@ -568,10 +559,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>Mon–Fri: 8am–5pm</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-medical">Medical</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('sound-auburn')">View Location</a>
@@ -597,10 +584,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>Mon–Fri: 8am–5pm</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-medical">Medical</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('acrs')">View Location</a>
@@ -626,10 +609,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>Mon–Fri: 8am–5pm</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-wellness">Wellness</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('ron-chew')">View Location</a>
@@ -655,10 +634,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>24 hours / 7 days</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-wellness">Wellness</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('legacy-house')">View Location</a>
@@ -684,10 +659,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>Mon–Fri: 8am–5pm</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-community">Community</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('meal-program')">View Location</a>
@@ -713,10 +684,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>School hours</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-community">Community</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('seattle-world-school')">View Location</a>
@@ -742,10 +709,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>Mon–Fri: 8am–5pm</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-medical">Medical</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('highland-health')">View Location</a>
@@ -771,10 +734,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>Varies by location</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-medical">Medical</span><span class="loc-tag loc-tag-community">Community</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('mobile-medical')">View Location</a>
@@ -800,10 +759,6 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div>By appointment only</div>
         </div>
-        <div class="loc-detail-row" style="font-size:11px; color:var(--muted); margin-left:0;">
-          (Inside line &amp; after hours) &nbsp;·&nbsp; TTY 711
-        </div>
-        <div class="loc-tags"><span class="loc-tag loc-tag-dental">Dental</span><span class="loc-tag loc-tag-community">Community</span></div>
         <div class="loc-card-actions">
           <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('mobile-dental')">View Location</a>
@@ -918,7 +873,7 @@
       <div class="mega-drop"><div class="mega-col"><h6>Current Patients</h6><ul><li>Make an Appointment</li><li>Telehealth</li><li>Sign Up for MyChart</li><li>After Hours Care</li></ul></div><div class="mega-col"><h6>Paying for Care</h6><ul><li>Billing</li><li>Insurance Assistance</li><li>Sliding Scale Discount</li></ul></div></div>
     </div>
     <div class="nav-item">Services <span class="drop-arrow">▼</span>
-      <div class="mega-drop"><div class="mega-col"><h6>General &amp; Urgent</h6><ul><li>Primary Care</li><li>Dental Care</li><li>After Hours Clinic</li><li>Eye Care</li></ul></div><div class="mega-col"><h6>Specialized Care</h6><ul><li>Behavioral Health</li><li>Pregnancy Care</li></ul></div></div>
+      <div class="mega-drop"><div class="mega-col"><h6>General</h6><ul><li>Primary Care</li><li>Dental Care</li><li>After Hours Clinic</li><li>Eye Care</li></ul></div><div class="mega-col"><h6>Specialized Care</h6><ul><li>Behavioral Health</li><li>Pregnancy Care</li></ul></div></div>
     </div>
     <div class="nav-item" onclick="showPage('locations')" style="color:var(--teal-dark); border-bottom-color:var(--teal-dark);">Location</div>
     <div class="nav-item">Find a Provider</div>
@@ -970,14 +925,29 @@
       <div class="svc-cat">
         <div class="svc-cat-header">
           <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-          <h4>Primary &amp; Urgent Care</h4>
+          <h4>Primary Care</h4>
         </div>
         <div class="svc-cat-items">
-          <div class="svc-cat-item">Adult &amp; Pediatric Medical Care</div>
-          <div class="svc-cat-item">On-site Pharmacy</div>
-          <div class="svc-cat-item">Comprehensive Dental</div>
-          <div class="svc-cat-item">Eye Care &amp; Prescriptions</div>
-          <div class="svc-cat-item">Behavioral Health</div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Adult &amp; Pediatric Medical Care</span><span class="svc-item-detail">Comprehensive check-ups, preventive care, and treatment for patients of all ages — from newborns to older adults.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">On-site Pharmacy</span><span class="svc-item-detail">Fill prescriptions and get medication counseling right at the clinic, with staff available in multiple languages.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Comprehensive Dental</span><span class="svc-item-detail">Preventive cleanings, fillings, extractions, and other dental services for children and adults.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Eye Care &amp; Prescriptions</span><span class="svc-item-detail">Vision exams and prescription eyewear referrals to help you see clearly and maintain long-term eye health.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Behavioral Health</span><span class="svc-item-detail">Mental health counseling and support services integrated with your primary care for whole-person wellness.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
         </div>
       </div>
       <div class="svc-cat">
@@ -986,11 +956,26 @@
           <h4>Specialized Support</h4>
         </div>
         <div class="svc-cat-items">
-          <div class="svc-cat-item">Chronic Disease Management</div>
-          <div class="svc-cat-item">Women's Preventative Health</div>
-          <div class="svc-cat-item">Medication Assisted Treatment</div>
-          <div class="svc-cat-item">HIV Prevention</div>
-          <div class="svc-cat-item">Coordination of Care</div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Chronic Disease Management</span><span class="svc-item-detail">Ongoing care and support for conditions like diabetes, hypertension, and asthma to help you stay healthy long-term.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Women's Preventative Health</span><span class="svc-item-detail">Annual exams, screenings, family planning, and reproductive health services tailored for women at every life stage.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Medication Assisted Treatment</span><span class="svc-item-detail">Evidence-based treatment combining medication and counseling to support recovery from substance use disorders.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">HIV Prevention</span><span class="svc-item-detail">PrEP, testing, and education services to help prevent HIV and support those living with the virus.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Coordination of Care</span><span class="svc-item-detail">Our care team connects you with specialists and community resources to make sure nothing falls through the cracks.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
         </div>
       </div>
       <div class="svc-cat">
@@ -999,11 +984,26 @@
           <h4>Community Resource</h4>
         </div>
         <div class="svc-cat-items">
-          <div class="svc-cat-item">WIC (Women, Infants, and Children)</div>
-          <div class="svc-cat-item">Insurance Enrollment</div>
-          <div class="svc-cat-item">Nutrition Counseling</div>
-          <div class="svc-cat-item">Acupuncture</div>
-          <div class="svc-cat-item">Health Education</div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">WIC (Women, Infants, and Children)</span><span class="svc-item-detail">Free nutrition support, breastfeeding help, and healthy food resources for pregnant women and young children.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Insurance Enrollment</span><span class="svc-item-detail">Friendly enrollment specialists help you sign up for Medicaid, Apple Health, or find coverage that fits your situation.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Nutrition Counseling</span><span class="svc-item-detail">Personalized guidance from a registered dietitian to support healthy eating habits and manage diet-related conditions.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Acupuncture</span><span class="svc-item-detail">Traditional acupuncture treatments to help with pain management, stress, and overall wellness.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
+          <div class="svc-cat-item" onclick="toggleSvcItem(this)">
+            <div class="svc-item-body"><span class="svc-item-text">Health Education</span><span class="svc-item-detail">Workshops and one-on-one sessions to help you understand your health, manage conditions, and make informed decisions.</span></div>
+            <span class="svc-item-arrow">›</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1118,7 +1118,7 @@
 
   <!-- Clinic Services Grid -->
   <div class="clinic-svc-section">
-    <h2>Clinic Services</h2>
+    <h2>Clinic Departments</h2>
     <div class="clinic-svc-grid">
     <div class="clinic-svc-card">
       <div class="clinic-svc-photo"><svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="6"/><path d="M50 35v30M35 50h30"/></svg></div>
@@ -1250,27 +1250,76 @@
     showPage('detail');
   }
 
+  // SERVICE ITEM ACCORDION
+  function toggleSvcItem(el) {
+    const isOpen = el.classList.contains('open');
+    // Close any open item in the same category
+    el.closest('.svc-cat-items').querySelectorAll('.svc-cat-item.open').forEach(function(item) {
+      item.classList.remove('open');
+    });
+    if (!isOpen) el.classList.add('open');
+  }
+
   // FILTER LOCATIONS
+  function toggleFilterPanel() {
+    const btn   = document.getElementById('filterToggleBtn');
+    const panel = document.getElementById('filterPanel');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+  }
+
+  function updateFilterBadge() {
+    const sortVal = document.getElementById('filterSortBy').value;
+    const distVal = document.getElementById('filterDistance').value;
+    const typeVal = document.getElementById('filterClinicType').value;
+    const svcVal  = document.getElementById('filterClinicService').value;
+    const count = [sortVal !== 'default', !!distVal, !!typeVal, !!svcVal].filter(Boolean).length;
+    const badge     = document.getElementById('filterBadge');
+    const clearLink = document.getElementById('filterClearLink');
+    badge.style.display     = count > 0 ? '' : 'none';
+    badge.textContent       = count;
+    clearLink.style.display = count > 0 ? '' : 'none';
+  }
+
   function filterLocations() {
-    const q = document.getElementById('locSearch').value.toLowerCase();
-    const checked = [...document.querySelectorAll('.filter-check-item input:checked')].map(i => i.value);
-    const cards = document.querySelectorAll('.loc-card');
+    const q       = document.getElementById('locSearch').value.toLowerCase();
+    const typeVal = document.getElementById('filterClinicType').value.toLowerCase();
+    const svcVal  = document.getElementById('filterClinicService').value.toLowerCase();
+    const sortVal = document.getElementById('filterSortBy').value;
+    const container = document.getElementById('locCards');
+    const cards = [...document.querySelectorAll('.loc-card')];
     let visible = 0;
     cards.forEach(card => {
       const text = card.textContent.toLowerCase();
-      const matchQ = !q || text.includes(q);
-      const matchType = checked.length === 0 || checked.some(t => text.toLowerCase().includes(t.toLowerCase()));
-      const show = matchQ && matchType;
+      const matchQ    = !q       || text.includes(q);
+      const matchType = !typeVal || text.includes(typeVal);
+      const matchSvc  = !svcVal  || text.includes(svcVal);
+      const show = matchQ && matchType && matchSvc;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
+    // Sort visible cards by name
+    if (sortVal === 'az' || sortVal === 'za') {
+      const visibleCards = cards.filter(c => c.style.display !== 'none');
+      visibleCards.sort((a, b) => {
+        const nameA = (a.querySelector('.loc-card-name')?.textContent || '').trim();
+        const nameB = (b.querySelector('.loc-card-name')?.textContent || '').trim();
+        return sortVal === 'az' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+      });
+      visibleCards.forEach(card => container.appendChild(card));
+    }
     document.getElementById('locCount').textContent = 'Showing ' + visible + ' location' + (visible !== 1 ? 's' : '');
+    updateFilterBadge();
   }
 
   function clearFilters() {
     document.getElementById('locSearch').value = '';
-    document.querySelectorAll('.filter-check-item input').forEach(i => i.checked = false);
-    document.querySelectorAll('.filter-input').forEach(s => s.selectedIndex = 0);
+    document.getElementById('filterSortBy').selectedIndex = 0;
+    document.getElementById('filterDistance').selectedIndex = 0;
+    document.getElementById('filterClinicType').selectedIndex = 0;
+    document.getElementById('filterClinicService').selectedIndex = 0;
     filterLocations();
   }
 

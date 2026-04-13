@@ -52,19 +52,36 @@
   .breadcrumb a{color:var(--muted);cursor:pointer;} .breadcrumb a:hover{color:var(--teal-dark);text-decoration:underline;} .breadcrumb span{color:var(--ink);font-weight:600;}
 
   /* ── PROVIDERS LIST PAGE ── */
-  .hero-wrap{display:grid;grid-template-columns:380px 1fr;min-height:280px;}
-  .hero-left{background:var(--navy);padding:52px 48px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
-  .hero-watermark{position:absolute;right:-24px;top:50%;transform:translateY(-50%);width:220px;height:220px;opacity:0.06;}
-  .hero-watermark svg{width:100%;height:100%;}
-  .hero-left h1{font-family:var(--font-head);font-size:36px;font-weight:700;color:white;line-height:1.15;margin-bottom:18px;position:relative;z-index:1;}
-  .hero-left p{font-size:14px;color:rgba(255,255,255,0.75);line-height:1.7;max-width:280px;position:relative;z-index:1;} .hero-left p a{color:var(--teal-mid);font-weight:600;}
-  .hero-right{background:var(--teal-light);padding:40px 52px;display:flex;flex-direction:column;justify-content:center;}
-  .panel-title{font-family:var(--font-head);font-size:17px;font-weight:700;color:var(--navy);margin-bottom:18px;}
-  .filter-field{position:relative;margin-bottom:12px;}
-  .filter-field select{width:100%;padding:13px 42px 13px 16px;border:1.5px solid rgba(0,0,0,0.13);border-radius:var(--radius-sm);background:white;font-family:var(--font-body);font-size:14px;color:var(--ink);appearance:none;outline:none;cursor:pointer;transition:border-color .15s;}
-  .filter-field select:focus{border-color:var(--teal-dark);box-shadow:0 0 0 3px rgba(2,110,112,0.1);}
-  .filter-field::after{content:'▼';position:absolute;right:15px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--muted);pointer-events:none;}
-  .search-btn{width:100%;padding:14px;margin-top:4px;background:var(--crimson);color:white;border:none;border-radius:var(--radius-sm);font-family:var(--font-head);font-size:15px;font-weight:700;cursor:pointer;transition:background .15s;} .search-btn:hover{background:#6b0d2d;}
+  .prov-hero{background:var(--teal-dark);padding:48px 40px;text-align:center;}
+  .prov-hero h1{font-family:var(--font-head);font-size:36px;font-weight:700;color:white;margin-bottom:8px;}
+  .prov-hero p{font-size:14px;color:rgba(255,255,255,0.75);line-height:1.7;margin-bottom:24px;} .prov-hero p a{color:var(--teal-mid);font-weight:600;}
+  /* Search + filter row */
+  .prov-search-row{display:flex;align-items:center;gap:12px;max-width:720px;margin:0 auto;}
+  .prov-search-bar{display:flex;align-items:center;background:white;border-radius:40px;padding:12px 22px;gap:10px;flex:1;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
+  .prov-search-bar svg{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;flex-shrink:0;}
+  .prov-search-bar input{border:none;outline:none;font-family:var(--font-body);font-size:15px;color:var(--ink);flex:1;}
+  .prov-search-bar input::placeholder{color:var(--muted);}
+  /* Filter toggle — dark background */
+  .filter-toggle-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.6);border-radius:40px;padding:10px 22px;font-family:var(--font-head);font-size:14px;font-weight:700;color:white;cursor:pointer;transition:background .15s;flex-shrink:0;}
+  .filter-toggle-btn:hover{background:rgba(255,255,255,0.25);}
+  .filter-toggle-btn .fchev{font-size:10px;transition:transform .2s;margin-left:2px;}
+  .filter-toggle-btn.open .fchev{transform:rotate(180deg);}
+  .filter-active-badge{background:var(--crimson);color:white;border-radius:20px;padding:1px 8px;font-size:11px;font-weight:700;display:none;}
+  .filter-clear-link{font-family:var(--font-head);font-size:13px;font-weight:700;color:rgba(255,255,255,0.85);cursor:pointer;background:none;border:none;text-decoration:underline;display:none;padding:4px;flex-shrink:0;}
+  .filter-clear-link:hover{color:white;}
+  /* Filter panel */
+  .filter-panel{display:none;max-width:720px;margin:16px auto 0;background:white;border-radius:14px;padding:24px 28px 20px;box-shadow:0 8px 32px rgba(7,44,56,0.22);text-align:left;}
+  .filter-panel.open{display:block;}
+  .fp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;}
+  .fp-field{display:flex;flex-direction:column;gap:6px;}
+  .fp-label{font-family:var(--font-head);font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+  .fp-select-wrap{position:relative;}
+  .fp-select-wrap select{appearance:none;width:100%;padding:11px 36px 11px 14px;border:1.5px solid #d0d8da;border-radius:8px;background:white;font-family:var(--font-body);font-size:14px;color:var(--ink);cursor:pointer;outline:none;transition:border-color .15s;}
+  .fp-select-wrap select:focus{border-color:var(--teal-dark);box-shadow:0 0 0 3px rgba(2,110,112,0.1);}
+  .fp-select-wrap::after{content:'▾';position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--muted);pointer-events:none;}
+  .fp-footer{display:flex;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid rgba(0,0,0,0.07);}
+  .fp-clear-btn{font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;background:none;border:none;padding:8px 16px;border-radius:6px;}
+  .fp-clear-btn:hover{background:var(--teal-light);color:var(--navy);}
 
   .results-section{background:var(--teal-light);padding:52px 40px 60px;}
   .results-title{font-family:var(--font-head);font-size:28px;font-weight:700;color:var(--navy);text-align:center;margin-bottom:32px;}
@@ -267,46 +284,85 @@
 </div>
 
   <!-- Hero + Filters -->
-  <div class="hero-wrap">
-    <div class="hero-left">
-      <div class="hero-watermark"><svg viewBox="0 0 100 100" fill="none"><path d="M50 5v90M5 50h90" stroke="white" stroke-width="12" stroke-linecap="round"/></svg></div>
-      <h1>Find a Provider</h1>
-      <p>Our providers are available for in-person or telehealth visits during clinic hours. Call <a href="tel:2067883700">206.788.3700</a> to make an appointment.</p>
+  <div class="prov-hero">
+    <h1>Find a Provider</h1>
+    <p>Available for in-person or telehealth visits. Call <a href="tel:2067883700">206.788.3700</a> to make an appointment.</p>
+    <div class="prov-search-row">
+      <div class="prov-search-bar">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="provSearch" placeholder="Search by name or specialty" oninput="applyFilters()"/>
+      </div>
+      <button class="filter-toggle-btn" id="filterToggleBtn" onclick="toggleProvFilterPanel()" aria-expanded="false" aria-controls="filterPanel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        Filters
+        <span class="filter-active-badge" id="filterBadge"></span>
+        <span class="fchev">▾</span>
+      </button>
+      <button class="filter-clear-link" id="filterClearLink" onclick="clearProvFilters()">Clear All</button>
     </div>
-    <div class="hero-right">
-      <div class="panel-title">View providers by:</div>
-      <div class="filter-field"><select id="filterLocation" onchange="applyFilters()">
-        <option value="International District Medical &amp; Dental Clinic">International District Medical &amp; Dental Clinic</option>
-        <option value="Holly Park Medical &amp; Dental Clinic">Holly Park Medical &amp; Dental Clinic</option>
-        <option value="Shoreline Medical &amp; Dental Clinic">Shoreline Medical &amp; Dental Clinic</option>
-        <option value="Bellevue Medical &amp; Dental Clinic">Bellevue Medical &amp; Dental Clinic</option>
-      </select></div>
-      <div class="filter-field"><select id="filterService" onchange="applyFilters()">
-        <option value="">Primary Care</option>
-        <option value="Physician">Physician</option>
-        <option value="Dentist">Dental</option>
-        <option value="Optometrist">Vision / Eye Care</option>
-        <option value="Behavioral">Behavioral Health</option>
-        <option value="Dietitian">Nutrition / Dietitian</option>
-        <option value="Advanced Practice">Advanced Practice</option>
-      </select></div>
-      <div class="filter-field"><select id="filterLanguage" onchange="applyFilters()">
-        <option value="">Languages</option>
-        <option value="Mandarin">Mandarin</option><option value="Cantonese">Cantonese</option>
-        <option value="Korean">Korean</option><option value="Hindi">Hindi</option>
-        <option value="Urdu">Urdu</option><option value="Vietnamese">Vietnamese</option>
-      </select></div>
-      <div class="filter-field"><select id="filterPronouns" onchange="applyFilters()">
-        <option value="">Pronouns</option>
-        <option value="she/her">She / Her</option><option value="he/him">He / Him</option><option value="they/them">They / Them</option>
-      </select></div>
-      <button class="search-btn" onclick="applyFilters()">Search Providers</button>
+    <div class="filter-panel" id="filterPanel" role="region" aria-label="Filter options">
+      <div class="fp-grid">
+        <div class="fp-field">
+          <label class="fp-label" for="filterLocation">Location</label>
+          <div class="fp-select-wrap">
+            <select id="filterLocation" onchange="applyFilters()">
+              <option value="">All Locations</option>
+              <option value="International District Medical &amp; Dental Clinic">International District</option>
+              <option value="Holly Park Medical &amp; Dental Clinic">Holly Park</option>
+              <option value="Shoreline Medical &amp; Dental Clinic">Shoreline</option>
+              <option value="Bellevue Medical &amp; Dental Clinic">Bellevue</option>
+            </select>
+          </div>
+        </div>
+        <div class="fp-field">
+          <label class="fp-label" for="filterService">Service Type</label>
+          <div class="fp-select-wrap">
+            <select id="filterService" onchange="applyFilters()">
+              <option value="">All Service Types</option>
+              <option value="Physician">Physician</option>
+              <option value="Dentist">Dental</option>
+              <option value="Optometrist">Vision / Eye Care</option>
+              <option value="Behavioral">Behavioral Health</option>
+              <option value="Dietitian">Nutrition / Dietitian</option>
+              <option value="Advanced Practice">Advanced Practice</option>
+            </select>
+          </div>
+        </div>
+        <div class="fp-field">
+          <label class="fp-label" for="filterLanguage">Language</label>
+          <div class="fp-select-wrap">
+            <select id="filterLanguage" onchange="applyFilters()">
+              <option value="">All Languages</option>
+              <option value="Mandarin">Mandarin</option>
+              <option value="Cantonese">Cantonese</option>
+              <option value="Korean">Korean</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Urdu">Urdu</option>
+              <option value="Vietnamese">Vietnamese</option>
+            </select>
+          </div>
+        </div>
+        <div class="fp-field">
+          <label class="fp-label" for="filterPronouns">Pronouns</label>
+          <div class="fp-select-wrap">
+            <select id="filterPronouns" onchange="applyFilters()">
+              <option value="">All Pronouns</option>
+              <option value="she/her">She / Her</option>
+              <option value="he/him">He / Him</option>
+              <option value="they/them">They / Them</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="fp-footer">
+        <button class="fp-clear-btn" onclick="clearProvFilters()">Clear All Filters</button>
+      </div>
     </div>
   </div>
 
   <!-- Results -->
   <div class="results-section">
-    <h2 class="results-title" id="resultsTitle">Providers from International District</h2>
+    <h2 class="results-title" id="resultsTitle">Providers — All Locations</h2>
     <div class="provider-grid" id="providerGrid">
       
     <div class="provider-card" data-id="aisling-shi-zhao" data-location="International District Medical & Dental Clinic" data-role="Physician" data-langs="English, Mandarin" onclick="openProvider('aisling-shi-zhao')">
@@ -901,11 +957,34 @@ function viewLess() {
 }
 
 /* ── FILTER ── */
+function toggleProvFilterPanel() {
+  const btn   = document.getElementById('filterToggleBtn');
+  const panel = document.getElementById('filterPanel');
+  const isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.setAttribute('aria-expanded', String(!isOpen));
+}
+
+function updateProvFilterBadge() {
+  const locVal  = document.getElementById('filterLocation').value;
+  const svcVal  = document.getElementById('filterService').value;
+  const langVal = document.getElementById('filterLanguage').value;
+  const pronVal = document.getElementById('filterPronouns').value;
+  const count = [!!locVal, !!svcVal, !!langVal, !!pronVal].filter(Boolean).length;
+  const badge     = document.getElementById('filterBadge');
+  const clearLink = document.getElementById('filterClearLink');
+  badge.style.display     = count > 0 ? '' : 'none';
+  badge.textContent       = count;
+  clearLink.style.display = count > 0 ? '' : 'none';
+}
+
 function applyFilters() {
   const locVal  = document.getElementById('filterLocation').value;
   const svcVal  = document.getElementById('filterService').value.toLowerCase();
   const langVal = document.getElementById('filterLanguage').value.toLowerCase();
   const pronVal = document.getElementById('filterPronouns').value.toLowerCase();
+  const query   = document.getElementById('provSearch').value.toLowerCase();
 
   const cards = [...document.getElementById('providerGrid').querySelectorAll('.provider-card')];
   let visible = 0;
@@ -916,7 +995,8 @@ function applyFilters() {
     const matchSvc  = !svcVal  || p.role.toLowerCase().includes(svcVal);
     const matchLang = !langVal || p.langs.toLowerCase().includes(langVal);
     const matchPron = !pronVal || p.pronouns === pronVal;
-    const show = matchLoc && matchSvc && matchLang && matchPron;
+    const matchQ    = !query   || p.name.toLowerCase().includes(query) || p.role.toLowerCase().includes(query);
+    const show = matchLoc && matchSvc && matchLang && matchPron && matchQ;
     card.style.display = show ? '' : 'none';
     delete card.dataset.hiddenByPagination;
     if (show) visible++;
@@ -924,13 +1004,24 @@ function applyFilters() {
 
   expanded = false;
   const locEl = document.getElementById('filterLocation');
-  const shortLoc = locEl.value.includes('International District') ? 'International District'
+  const shortLoc = !locEl.value ? 'All Locations'
+    : locEl.value.includes('International District') ? 'International District'
     : locEl.value.includes('Holly Park') ? 'Holly Park'
     : locEl.value.includes('Shoreline') ? 'Shoreline'
     : locEl.value.includes('Bellevue') ? 'Bellevue' : 'ICHS';
-  document.getElementById('resultsTitle').textContent = visible > 0 ? `Providers from ${shortLoc}` : 'No providers found';
+  document.getElementById('resultsTitle').textContent = visible > 0 ? `Providers — ${shortLoc}` : 'No providers found';
   document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
   updateVisibility();
+  updateProvFilterBadge();
+}
+
+function clearProvFilters() {
+  document.getElementById('filterLocation').selectedIndex = 0;
+  document.getElementById('filterService').selectedIndex = 0;
+  document.getElementById('filterLanguage').selectedIndex = 0;
+  document.getElementById('filterPronouns').selectedIndex = 0;
+  document.getElementById('provSearch').value = '';
+  applyFilters();
 }
 
 /* ── LANG DROPDOWN ── */
