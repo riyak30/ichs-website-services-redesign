@@ -270,6 +270,16 @@
     .footer-bottom a { color: rgba(255,255,255,0.5); text-decoration: underline; }
     .footer-lang-notice { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,0.45); border-top: 1px solid rgba(255,255,255,0.07); padding-top: 12px; }
 
+    /* ── FUN FACT STRIP ── */
+    .fun-fact-strip { background: #fffbf0; border: 1.5px solid #f0d080; border-radius: var(--radius-md); padding: 20px 24px; margin-bottom: 28px; }
+    .fun-fact-eyebrow { display: flex; align-items: center; gap: 7px; font-family: var(--font-head); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #9a6f00; margin-bottom: 14px; }
+    .fun-fact-eyebrow svg { width: 14px; height: 14px; stroke: #c89400; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .fun-fact-single { display: flex; align-items: flex-start; gap: 14px; }
+    .fun-fact-card-icon { width: 36px; height: 36px; border-radius: 50%; background: #fff3c4; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .fun-fact-card-icon svg { width: 16px; height: 16px; stroke: #b07e00; fill: none; stroke-width: 1.8; }
+    .fun-fact-card-name { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .fun-fact-card-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
     @media (max-width: 900px) {
       .detail-layout { grid-template-columns: 1fr; }
       .service-grid { grid-template-columns: 1fr 1fr; }
@@ -757,6 +767,41 @@
 
       <!-- Main Content -->
       <div class="detail-main">
+
+        <!-- Fun Fact: Primary Care (acute care) -->
+        <div class="fun-fact-strip" id="fun-fact-primary" style="display:none;">
+          <div class="fun-fact-eyebrow">
+            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.6-1.4 4.9-3.5 6.2V17a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-1.8C6.4 13.9 5 11.6 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/><path d="M9 17h6"/></svg>
+            Did you know?
+          </div>
+          <div class="fun-fact-single">
+            <div class="fun-fact-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div>
+              <div class="fun-fact-card-name">Acute Care — Same-Day Help, When You Need It</div>
+              <div class="fun-fact-card-text">Beyond routine visits, ICHS offers acute care for sudden illness and injuries — so you can get seen quickly without a trip to the ER. Walk-ins are welcome at select locations.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fun Fact: Dental Care (pediatric dental) -->
+        <div class="fun-fact-strip" id="fun-fact-dental" style="display:none;">
+          <div class="fun-fact-eyebrow">
+            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.6-1.4 4.9-3.5 6.2V17a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-1.8C6.4 13.9 5 11.6 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/><path d="M9 17h6"/></svg>
+            Did you know?
+          </div>
+          <div class="fun-fact-single">
+            <div class="fun-fact-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div class="fun-fact-card-name">Pediatric Dental — Starting at Age 1</div>
+              <div class="fun-fact-card-text">ICHS sees children as young as 1 year old for their very first dental checkup — because healthy smiles start early.</div>
+            </div>
+          </div>
+        </div>
+
         <div class="what-we-offer-label">What We Offer</div>
         <h2>Our Services Include</h2>
         <p class="intro">Comprehensive care for your whole family, from newborns to seniors — all in a welcoming, culturally responsive environment.</p>
@@ -938,6 +983,10 @@
         if (label) { label.classList.add('open', 'active'); }
       }
     }
+
+    // Show the right fun fact strip
+    document.getElementById('fun-fact-primary').style.display = key === 'Primary_Care' ? '' : 'none';
+    document.getElementById('fun-fact-dental').style.display  = key === 'Dental_Care'  ? '' : 'none';
 
     showPage('detail');
   }
