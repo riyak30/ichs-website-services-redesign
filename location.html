@@ -210,6 +210,8 @@
     .svc-cat-item:hover { background:var(--teal-light); }
     .svc-item-body { flex:1; display:flex; flex-direction:column; gap:0; }
     .svc-item-text { font-family:var(--font-head); font-size:13px; font-weight:600; color:var(--navy); line-height:1.4; }
+    .svc-detail-link { color:var(--teal-dark); font-weight:600; text-decoration:underline; text-decoration-color:rgba(2,110,112,0.35); text-underline-offset:2px; transition:text-decoration-color .15s; }
+    .svc-detail-link:hover { text-decoration-color:var(--teal-dark); }
     .svc-item-detail { font-size:12px; color:var(--muted); line-height:1.6; max-height:0; overflow:hidden; transition:max-height 0.3s ease, margin-top 0.3s ease; margin-top:0; }
     .svc-cat-item.open .svc-item-detail { max-height:80px; margin-top:6px; }
     .svc-item-arrow { font-size:16px; color:var(--muted); transition:transform 0.25s, color 0.15s; flex-shrink:0; padding-top:1px; }
@@ -246,22 +248,38 @@
     .prov-detail svg { width:12px; height:12px; stroke:var(--teal-dark); fill:none; stroke-width:2; flex-shrink:0; }
 
     /* Clinic Services grid */
-    .clinic-svc-section { background:#014f50; padding:52px 40px; }
-    .clinic-svc-section h2 { font-family:var(--font-head); font-size:24px; font-weight:700; color:white; text-align:center; margin-bottom:28px; }
-    .clinic-svc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
-    .clinic-svc-card { background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.2); border-radius:var(--radius-md); overflow:hidden; }
-    .clinic-svc-photo { height:110px; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; }
-    .clinic-svc-photo svg { width:40px; height:40px; stroke:rgba(255,255,255,0.3); fill:none; stroke-width:0.8; }
-    .clinic-svc-info { padding:14px; }
-    .clinic-svc-name { font-family:var(--font-head); font-size:14px; font-weight:700; color:white; margin-bottom:8px; }
-    .clinic-svc-detail { display:flex; align-items:center; gap:6px; font-size:12px; color:rgba(255,255,255,0.75); margin-bottom:5px; }
-    .clinic-svc-detail svg { width:12px; height:12px; stroke:var(--teal-mid); fill:none; stroke-width:2; flex-shrink:0; }
+    .clinic-svc-section { background:#f0ede8; padding:52px 40px; }
+    .clinic-svc-section h2 { font-family:var(--font-head); font-size:26px; font-weight:700; color:var(--navy); text-align:center; margin-bottom:6px; }
+    .clinic-svc-subtitle { text-align:center; font-size:14px; color:var(--muted); margin-bottom:36px; }
+    /* Carousel */
+    .dept-carousel-wrap { position:relative; max-width:920px; margin:0 auto; }
+    .dept-carousel-viewport { overflow:hidden; border-radius:var(--radius-lg); }
+    .dept-carousel-track { display:flex; gap:16px; transition:transform .4s cubic-bezier(.4,0,.2,1); will-change:transform; }
+    .clinic-svc-card { background:white; border:1.5px solid rgba(0,0,0,0.07); border-radius:var(--radius-lg); padding:22px 20px; flex:0 0 calc((100% - 32px) / 3); transition:box-shadow .15s, border-color .15s; }
+    .clinic-svc-card:hover { border-color:var(--teal-mid); box-shadow:0 4px 20px rgba(2,110,112,0.08); }
+    .clinic-svc-icon { width:40px; height:40px; border-radius:10px; background:var(--teal-light); display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+    .clinic-svc-icon svg { width:20px; height:20px; stroke:var(--teal-dark); fill:none; stroke-width:1.6; }
+    .clinic-svc-name { font-family:var(--font-head); font-size:15px; font-weight:700; color:var(--navy); margin-bottom:10px; }
+    .clinic-svc-divider { border:none; border-top:1px solid rgba(0,0,0,0.08); margin-bottom:10px; }
+    .clinic-svc-phone { font-family:var(--font-head); font-size:14px; font-weight:700; color:var(--crimson); margin-bottom:6px; text-decoration:none; display:block; }
+    .clinic-svc-phone:hover { text-decoration:underline; }
+    .clinic-svc-hours { font-size:13px; color:var(--muted); line-height:1.5; }
+    /* Carousel controls */
+    .dept-carousel-btn { position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%; background:white; border:1.5px solid rgba(0,0,0,0.1); display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,0.1); transition:border-color .15s, box-shadow .15s; z-index:2; color:var(--navy); font-size:18px; user-select:none; }
+    .dept-carousel-btn:hover { border-color:var(--teal-dark); box-shadow:0 4px 16px rgba(2,110,112,0.15); }
+    .dept-carousel-btn.prev { left:-20px; }
+    .dept-carousel-btn.next { right:-20px; }
+    .dept-carousel-btn:disabled { opacity:0.3; cursor:default; pointer-events:none; }
+    .dept-carousel-dots { display:flex; justify-content:center; gap:8px; margin-top:24px; }
+    .dept-carousel-dot { width:8px; height:8px; border-radius:50%; background:rgba(2,110,112,0.2); cursor:pointer; transition:background .2s, transform .2s; border:none; padding:0; }
+    .dept-carousel-dot.active { background:var(--teal-dark); transform:scale(1.2); }
 
     @media(max-width:900px) {
       .loc-body { grid-template-columns:1fr; }
       .detail-header-card { grid-template-columns:1fr; }
       .detail-meta-row { grid-template-columns:1fr; }
-      .svc-categories, .clinic-svc-grid, .provider-grid { grid-template-columns:1fr 1fr; }
+      .svc-categories, .provider-grid { grid-template-columns:1fr 1fr; }
+      .clinic-svc-card { flex:0 0 calc((100% - 16px) / 2); }
       .hfy-strip, .nl-strip { grid-template-columns:1fr; }
       .footer-grid { grid-template-columns:1fr 1fr; }
     }
@@ -930,27 +948,27 @@
       <div class="svc-cat">
         <div class="svc-cat-header">
           <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-          <h4>Primary Care</h4>
+          <h4>General Care</h4>
         </div>
         <div class="svc-cat-items">
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">Adult &amp; Pediatric Medical Care</span><span class="svc-item-detail">Comprehensive check-ups, preventive care, and treatment for patients of all ages — from newborns to older adults.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">Adult &amp; Pediatric Medical Care</span><span class="svc-item-detail">Comprehensive check-ups, <a class="svc-detail-link" href="services.html#Primary_Care" onclick="event.stopPropagation()">preventive care</a>, and treatment for patients of all ages — from newborns to older adults.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">On-site Pharmacy</span><span class="svc-item-detail">Fill prescriptions and get medication counseling right at the clinic, with staff available in multiple languages.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">On-site Pharmacy</span><span class="svc-item-detail">Fill <a class="svc-detail-link" href="services.html#Pharmacy" onclick="event.stopPropagation()">prescriptions</a> and get medication counseling right at the clinic, with staff available in multiple languages.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">Comprehensive Dental</span><span class="svc-item-detail">Preventive cleanings, fillings, extractions, and other dental services for children and adults.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">Comprehensive Dental</span><span class="svc-item-detail">Preventive cleanings, fillings, extractions, and other <a class="svc-detail-link" href="services.html#Dental_Care" onclick="event.stopPropagation()">dental services</a> for children and adults.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">Eye Care &amp; Prescriptions</span><span class="svc-item-detail">Vision exams and prescription eyewear referrals to help you see clearly and maintain long-term eye health.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">Eye Care &amp; Prescriptions</span><span class="svc-item-detail"><a class="svc-detail-link" href="services.html#Eye_Care" onclick="event.stopPropagation()">Vision exams</a> and prescription eyewear referrals to help you see clearly and maintain long-term eye health.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">Behavioral Health</span><span class="svc-item-detail">Mental health counseling and support services integrated with your primary care for whole-person wellness.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">Behavioral Health</span><span class="svc-item-detail"><a class="svc-detail-link" href="services.html#Behavioral_Health" onclick="event.stopPropagation()">Mental health counseling</a> and support services integrated with your primary care for whole-person wellness.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
         </div>
@@ -966,15 +984,15 @@
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">Women's Preventative Health</span><span class="svc-item-detail">Annual exams, screenings, family planning, and reproductive health services tailored for women at every life stage.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">Women's Preventative Health</span><span class="svc-item-detail">Annual exams, screenings, <a class="svc-detail-link" href="services.html#Sexual_Health_and_Wellness" onclick="event.stopPropagation()">family planning</a>, and reproductive health services tailored for women at every life stage.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">Medication Assisted Treatment</span><span class="svc-item-detail">Evidence-based treatment combining medication and counseling to support recovery from substance use disorders.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">Medication Assisted Treatment</span><span class="svc-item-detail">Evidence-based treatment combining medication and counseling to support <a class="svc-detail-link" href="services.html#Medication_Assisted_Treatment" onclick="event.stopPropagation()">recovery from substance use disorders</a>.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">HIV Prevention</span><span class="svc-item-detail">PrEP, testing, and education services to help prevent HIV and support those living with the virus.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">HIV Prevention</span><span class="svc-item-detail"><a class="svc-detail-link" href="services.html#Sexual_Health_and_Wellness" onclick="event.stopPropagation()">PrEP</a>, testing, and education services to help prevent HIV and support those living with the virus.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
@@ -990,7 +1008,7 @@
         </div>
         <div class="svc-cat-items">
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">WIC (Women, Infants, and Children)</span><span class="svc-item-detail">Free nutrition support, breastfeeding help, and healthy food resources for pregnant women and young children.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">WIC (Women, Infants, and Children)</span><span class="svc-item-detail">Free <a class="svc-detail-link" href="services.html#Women_Infants_and_Children_WIC" onclick="event.stopPropagation()">nutrition support</a>, breastfeeding help, and healthy food resources for pregnant women and young children.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
@@ -998,15 +1016,15 @@
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">Nutrition Counseling</span><span class="svc-item-detail">Personalized guidance from a registered dietitian to support healthy eating habits and manage diet-related conditions.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">Nutrition Counseling</span><span class="svc-item-detail">Personalized guidance from a <a class="svc-detail-link" href="services.html#Nutrition_Services" onclick="event.stopPropagation()">registered dietitian</a> to support healthy eating habits and manage diet-related conditions.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">Acupuncture</span><span class="svc-item-detail">Traditional acupuncture treatments to help with pain management, stress, and overall wellness.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">Acupuncture</span><span class="svc-item-detail">Traditional acupuncture treatments to help with <a class="svc-detail-link" href="services.html#Acupuncture" onclick="event.stopPropagation()">pain management</a>, stress, and overall wellness.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
           <div class="svc-cat-item" onclick="toggleSvcItem(this)">
-            <div class="svc-item-body"><span class="svc-item-text">Health Education</span><span class="svc-item-detail">Workshops and one-on-one sessions to help you understand your health, manage conditions, and make informed decisions.</span></div>
+            <div class="svc-item-body"><span class="svc-item-text">Health Education</span><span class="svc-item-detail">Workshops and one-on-one sessions to help you understand your health, manage conditions, and make <a class="svc-detail-link" href="services.html#Health_Education" onclick="event.stopPropagation()">informed decisions</a>.</span></div>
             <span class="svc-item-arrow">›</span>
           </div>
         </div>
@@ -1032,7 +1050,7 @@
         </select>
       </div>
       <div class="prov-actions">
-        <a class="btn-outline-teal" href="#">View All Providers</a>
+        <a class="btn-outline-teal" href="providers.html">View All Providers</a>
         <a class="btn-crimson" onclick="showProviders()">Find Provider</a>
       </div>
       <div id="providerResults" style="display:none;">
@@ -1124,62 +1142,80 @@
   <!-- Clinic Services Grid -->
   <div class="clinic-svc-section">
     <h2>Clinic Departments</h2>
-    <div class="clinic-svc-grid">
-    <div class="clinic-svc-card">
-      <div class="clinic-svc-info">
+    <p class="clinic-svc-subtitle">Call to book an appointment · All services available in multiple languages</p>
+    <div class="dept-carousel-wrap">
+      <button class="dept-carousel-btn prev" id="deptPrev" onclick="deptSlide(-1)" aria-label="Previous">&#8249;</button>
+      <button class="dept-carousel-btn next" id="deptNext" onclick="deptSlide(1)" aria-label="Next">&#8250;</button>
+      <div class="dept-carousel-viewport">
+        <div class="dept-carousel-track" id="deptTrack">
+
+      <!-- Medical: stethoscope -->
+      <div class="clinic-svc-card">
+        <div class="clinic-svc-icon"><svg viewBox="0 0 24 24"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"/><path d="M6 3H4"/><path d="M18 3h2"/><path d="M12 16v3"/><circle cx="12" cy="21" r="1.5"/></svg></div>
         <div class="clinic-svc-name">Medical Clinic</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3700</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon–Sat: 8am–5pm</span></div>
+        <hr class="clinic-svc-divider">
+        <a class="clinic-svc-phone" href="tel:2067883700">(206) 788-3700</a>
+        <div class="clinic-svc-hours">Mon–Sat · 8am–5pm</div>
       </div>
-    </div>
 
-    <div class="clinic-svc-card">
-      <div class="clinic-svc-info">
+      <!-- Dental: tooth -->
+      <div class="clinic-svc-card">
+        <div class="clinic-svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2c-2.5 0-5 2-5 5 0 1.4.4 2.6 1 3.7C7.4 12.5 7 14.2 7 16c0 2.2 1.3 4 2.5 4 .7 0 1.3-.6 1.8-1.8.4-1 .7-1.2.7-1.2s.3.2.7 1.2C13.2 19.4 13.8 20 14.5 20 15.7 20 17 18.2 17 16c0-1.8-.4-3.5-1-5.3.6-1.1 1-2.3 1-3.7 0-3-2.5-5-5-5z"/></svg></div>
         <div class="clinic-svc-name">Dental Clinic</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3757</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon–Sat: 8am–5pm</span></div>
+        <hr class="clinic-svc-divider">
+        <a class="clinic-svc-phone" href="tel:2067883757">(206) 788-3757</a>
+        <div class="clinic-svc-hours">Mon–Sat · 8am–5pm</div>
       </div>
-    </div>
 
-    <div class="clinic-svc-card">
-      <div class="clinic-svc-info">
+      <!-- Vision: eye -->
+      <div class="clinic-svc-card">
+        <div class="clinic-svc-icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
         <div class="clinic-svc-name">Vision Clinic</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3505</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon, Tue, Thu: 9am–5pm<br>Wed: 9am–1pm</span></div>
+        <hr class="clinic-svc-divider">
+        <a class="clinic-svc-phone" href="tel:2067883505">(206) 788-3505</a>
+        <div class="clinic-svc-hours">Mon, Tue, Thu · 9am–5pm<br>Wed · 9am–1pm</div>
       </div>
-    </div>
 
-    <div class="clinic-svc-card">
-      <div class="clinic-svc-info">
+      <!-- Acupuncture: needle pointing down -->
+      <div class="clinic-svc-card">
+        <div class="clinic-svc-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="18"/><polyline points="7 13 12 18 17 13"/><path d="M8 6h8"/></svg></div>
         <div class="clinic-svc-name">Acupuncture</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3700</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon–Thu: 9am–5pm</span></div>
+        <hr class="clinic-svc-divider">
+        <a class="clinic-svc-phone" href="tel:2067883700">(206) 788-3700</a>
+        <div class="clinic-svc-hours">Mon–Thu · 9am–5pm</div>
       </div>
-    </div>
 
-    <div class="clinic-svc-card">
-      <div class="clinic-svc-info">
+      <!-- Nutrition: apple/fruit -->
+      <div class="clinic-svc-card">
+        <div class="clinic-svc-icon"><svg viewBox="0 0 24 24"><path d="M12 22c-4 0-8-4.5-8-10a8 8 0 0 1 16 0c0 5.5-4 10-8 10z"/><path d="M12 7V2"/><path d="M9 4l3-2 3 2"/></svg></div>
         <div class="clinic-svc-name">Nutrition</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3701</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon–Sat: 8am–5pm</span></div>
+        <hr class="clinic-svc-divider">
+        <a class="clinic-svc-phone" href="tel:2067883701">(206) 788-3701</a>
+        <div class="clinic-svc-hours">Mon–Sat · 8am–5pm</div>
       </div>
-    </div>
 
-    <div class="clinic-svc-card">
-      <div class="clinic-svc-info">
-        <div class="clinic-svc-name">Women, Infants & Children (WIC)</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3701</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon–Sat: 8:30am–5pm</span></div>
+      <!-- WIC: two people / family -->
+      <div class="clinic-svc-card">
+        <div class="clinic-svc-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="18" cy="8" r="2"/><path d="M21 21v-1.5a3.5 3.5 0 0 0-2.5-3.35"/></svg></div>
+        <div class="clinic-svc-name">Women, Infants &amp; Children (WIC)</div>
+        <hr class="clinic-svc-divider">
+        <a class="clinic-svc-phone" href="tel:2067883701">(206) 788-3701</a>
+        <div class="clinic-svc-hours">Mon–Sat · 8:30am–5pm</div>
       </div>
-    </div>
 
-    <div class="clinic-svc-card">
-      <div class="clinic-svc-info">
+      <!-- Pharmacy: pill bottle -->
+      <div class="clinic-svc-card">
+        <div class="clinic-svc-icon"><svg viewBox="0 0 24 24"><rect x="8" y="5" width="8" height="16" rx="2"/><path d="M10 2h4"/><path d="M8 11h8"/></svg></div>
         <div class="clinic-svc-name">Pharmacy</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>(206) 788-3770</div>
-        <div class="clinic-svc-detail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon–Fri: 8am–5pm<br>Sat: 9am–5pm</span></div>
+        <hr class="clinic-svc-divider">
+        <a class="clinic-svc-phone" href="tel:2067883770">(206) 788-3770</a>
+        <div class="clinic-svc-hours">Mon–Fri · 8am–5pm<br>Sat · 9am–5pm</div>
       </div>
-    </div></div>
+
+        </div><!-- end track -->
+      </div><!-- end viewport -->
+      <div class="dept-carousel-dots" id="deptDots"></div>
+    </div><!-- end carousel-wrap -->
   </div>
 
   <div style="height:16px; background:white;"></div>
@@ -1345,6 +1381,49 @@
     if (hash && LOC_DATA[hash]) {
       showDetail(hash);
     }
+  })();
+
+  // ── CLINIC DEPARTMENTS CAROUSEL ──
+  (function() {
+    const VISIBLE = 3;
+    const track   = document.getElementById('deptTrack');
+    const dotsEl  = document.getElementById('deptDots');
+    const prevBtn = document.getElementById('deptPrev');
+    const nextBtn = document.getElementById('deptNext');
+    if (!track) return;
+
+    const cards = track.querySelectorAll('.clinic-svc-card');
+    const total = cards.length;
+    const pages = Math.ceil(total / VISIBLE);
+    let current = 0;
+
+    // Build dots
+    for (let i = 0; i < pages; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'dept-carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to page ' + (i + 1));
+      dot.addEventListener('click', () => goToPage(i));
+      dotsEl.appendChild(dot);
+    }
+
+    function goToPage(page) {
+      current = Math.max(0, Math.min(page, pages - 1));
+      const cardWidth  = cards[0].offsetWidth + 16; // card + gap
+      track.style.transform = 'translateX(-' + (current * VISIBLE * cardWidth) + 'px)';
+      dotsEl.querySelectorAll('.dept-carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === pages - 1;
+    }
+
+    function deptSlide(dir) { goToPage(current + dir); }
+    window.deptSlide = deptSlide;
+
+    goToPage(0);
+
+    // Recalculate on resize
+    window.addEventListener('resize', () => goToPage(current));
   })();
 </script>
 </body>

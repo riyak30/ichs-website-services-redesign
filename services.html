@@ -199,11 +199,11 @@
     .sub-card.featured { background: var(--teal-dark); border-color: var(--teal-dark); }
     .sub-card.featured h5 { color: white; }
     .sub-card.featured p { color: rgba(255,255,255,0.8); }
-    .sub-card.featured .sub-link { color: var(--teal-mid); }
+    .sub-card.featured .inline-link { color: var(--teal-mid); }
     .sub-card h5 { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
     .sub-card p { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
-    .sub-link { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--teal-dark); cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
-    .sub-link:hover { text-decoration: underline; }
+    .inline-link { color: var(--teal-dark); font-weight: 600; text-decoration: underline; text-decoration-color: rgba(2,110,112,0.35); text-underline-offset: 2px; transition: text-decoration-color 0.15s; }
+    .inline-link:hover { text-decoration-color: var(--teal-dark); }
 
     /* Provider finder */
     .provider-finder { background: white; border-radius: var(--radius-lg); border: 1.5px solid rgba(0,0,0,0.07); padding: 28px 32px; margin-bottom: 40px; }
@@ -810,32 +810,26 @@
           <div class="sub-card">
             <h5>Preventive Care</h5>
             <p>Stay healthy with routine check-ups, vaccinations, screenings, and personalized wellness plans designed to prevent illness before it starts.</p>
-            <span class="sub-link">Schedule a check-up →</span>
           </div>
           <div class="sub-card">
             <h5>After Hours Care</h5>
-            <p>Extended evening and weekend hours so care fits your schedule, not the other way around.</p>
-            <span class="sub-link">Schedule a check-up →</span>
+            <p>Need care after 5 pm? Our <a class="inline-link" href="https://www.ichs.com/services/after-hours" target="_blank" rel="noopener">After Hours Clinic</a> at Holly Park is open evenings so care fits your schedule, not the other way around.</p>
           </div>
           <div class="sub-card">
             <h5>Child Checkups</h5>
-            <p>Well-child visits, developmental screenings, and immunizations to keep your children healthy and thriving at every age.</p>
-            <span class="sub-link">Book for your child →</span>
+            <p>Well-child visits, developmental screenings, and immunizations to keep your children healthy and thriving at every age. Nutrition support is also available through <a class="inline-link" href="https://www.ichs.com/services/wic" target="_blank" rel="noopener">WIC</a>.</p>
           </div>
           <div class="sub-card">
             <h5>Women's Health</h5>
-            <p>Comprehensive gynecological care, prenatal services, and reproductive health support tailored to your needs and values.</p>
-            <span class="sub-link">Learn More →</span>
+            <p>Gynecological care, reproductive health support, and dedicated <a class="inline-link" href="https://www.ichs.com/services/pregnancy-care" target="_blank" rel="noopener">pregnancy care</a> — all tailored to your needs and values.</p>
           </div>
           <div class="sub-card">
             <h5>Family Planning</h5>
-            <p>Contraception counseling, fertility awareness, and family planning resources tailored to your needs and values.</p>
-            <span class="sub-link">Learn More →</span>
+            <p>Contraception counseling, fertility awareness, and <a class="inline-link" href="https://www.ichs.com/services/sexual-health" target="_blank" rel="noopener">sexual health &amp; wellness</a> resources tailored to your needs and values.</p>
           </div>
           <div class="sub-card">
             <h5>Geriatrics</h5>
-            <p>Specialized medical and wellness support for older adults.</p>
-            <span class="sub-link">Learn More →</span>
+            <p>Specialized <a class="inline-link" href="https://www.ichs.com/services/geriatric-care" target="_blank" rel="noopener">geriatric care</a> and wellness support designed for the unique health needs of older adults.</p>
           </div>
         </div>
 

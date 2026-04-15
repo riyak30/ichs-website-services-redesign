@@ -271,6 +271,16 @@
     .hero-arrow:hover { background: rgba(255,255,255,0.25); }
     .hero-arrow.prev { left: 20px; }
     .hero-arrow.next { right: 20px; }
+    .hero-tag--announce { background: rgba(255,185,0,0.18); color: #ffd560; border-color: rgba(255,185,0,0.4); }
+    .hero-title--announce span { color: #ffd560; }
+    .hero-slide-right--announce { background: linear-gradient(135deg, #5a0e26 0%, var(--crimson) 60%, #a8183e 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .hero-slide-right--announce::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 28px, rgba(255,255,255,0.03) 28px, rgba(255,255,255,0.03) 30px); }
+    .announce-graphic { display: flex; flex-direction: column; align-items: center; gap: 16px; z-index: 1; }
+    .announce-graphic svg { width: 72px; height: 72px; stroke: rgba(255,255,255,0.25); fill: none; stroke-width: 1; }
+    .announce-date-chip { font-family: var(--font-head); font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 5px 14px; }
+    .hero-announce-list { list-style: none; margin-bottom: 24px; display: flex; flex-direction: column; gap: 7px; }
+    .hero-announce-list li { font-size: 15px; color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 8px; }
+    .hero-announce-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #ffd560; flex-shrink: 0; }
 
     /* ── SHORTCUT BAR ── */
     .shortcut-wrapper {
@@ -679,21 +689,28 @@
         <img src="img/multilingual.png" alt="Multilingual Care">
       </div>
     </div>
-    <!-- Slide 3 -->
+    <!-- Slide 3 — Announcement -->
     <div class="hero-slide">
       <div class="hero-slide-left">
         <div class="hero-content">
-          <div class="hero-tag">Community Rooted · Health Focused</div>
-          <h1 class="hero-title">Your Community.<br><span>Your Health Home.</span></h1>
-          <p class="hero-sub">From primary care to behavioral health, we provide comprehensive, affordable care for every stage of life.</p>
+          <div class="hero-tag hero-tag--announce">New · Beginning May 2026</div>
+          <h1 class="hero-title hero-title--announce">Behavioral Health Care<br><span>at Bellevue Clinic.</span></h1>
+          <ul class="hero-announce-list">
+            <li>2nd and 4th Saturday</li>
+            <li>ICHS Bellevue Clinic</li>
+            <li>Provider: Yeji Youn Hirai, LSWAIC</li>
+          </ul>
           <div class="hero-btns">
-            <a class="btn btn-primary" href="location.html">Find a Location</a>
-            <a class="btn btn-outline-white" href="#">Support Us →</a>
+            <a class="btn btn-primary" href="tel:4253733000">Call (425) 373-3000</a>
+            <a class="btn btn-outline-white" href="location.html#bellevue">Find the Clinic →</a>
           </div>
         </div>
       </div>
-      <div class="hero-slide-right">
-        <img src="img/community-rooted.png" alt="Community Rooted">
+      <div class="hero-slide-right hero-slide-right--announce">
+        <div class="announce-graphic">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <div class="announce-date-chip">Behavioral Health · Bellevue</div>
+        </div>
       </div>
     </div>
   </div>
@@ -759,7 +776,7 @@
         <div class="caller-card returning">
           <h4>For Returning Patients,</h4>
           <p>Please call the clinic number.</p>
-          <a href="#">View all Locations</a>
+          <a href="location.html">View all Locations</a>
         </div>
       </div>
       <div class="new-patient-cta">
