@@ -209,13 +209,28 @@
     .provider-finder { background: white; border-radius: var(--radius-lg); border: 1.5px solid rgba(0,0,0,0.07); padding: 28px 32px; margin-bottom: 40px; }
     .provider-finder h3 { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
     .provider-finder p { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
-    .finder-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end; }
+    .finder-form { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px; }
     .finder-field label { display: block; font-family: var(--font-head); font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
     .finder-field input, .finder-field select { width: 100%; padding: 10px 14px; border: 1.5px solid #d0d8da; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 14px; color: var(--ink); background: white; outline: none; transition: border-color 0.15s; }
     .finder-field input:focus, .finder-field select:focus { border-color: var(--teal-dark); }
-    .find-btn { display: flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: var(--radius-sm); background: var(--crimson); color: white; border: none; font-family: var(--font-head); font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; }
-    .find-btn:hover { background: #6b0d2d; }
-    .find-btn svg { width: 14px; height: 14px; stroke: white; fill: none; stroke-width: 2; }
+    .prov-select-wrap { position: relative; margin-bottom: 16px; }
+    .prov-select-wrap select { width: 100%; padding: 12px 40px 12px 16px; border: 1.5px solid #d0d8da; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 14px; color: var(--ink); background: white; outline: none; appearance: none; cursor: pointer; transition: border-color .15s; }
+    .prov-select-wrap select:focus { border-color: var(--teal-dark); }
+    .prov-select-wrap::after { content: '▼'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 10px; color: var(--muted); pointer-events: none; }
+    .prov-actions { display: flex; gap: 12px; }
+    .btn-crimson { display: inline-flex; align-items: center; gap: 6px; padding: 11px 22px; border-radius: 40px; font-family: var(--font-head); font-size: 14px; font-weight: 700; cursor: pointer; background: var(--crimson); color: white; border: 2px solid var(--crimson); transition: all .15s; }
+    .btn-crimson:hover { background: #6b0d2d; border-color: #6b0d2d; }
+    .results-label { font-family: var(--font-head); font-size: 16px; font-weight: 700; color: var(--navy); margin: 20px 0 14px; }
+    .provider-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .provider-card { background: white; border-radius: var(--radius-md); border: 1.5px solid rgba(0,0,0,0.07); overflow: hidden; transition: border-color .15s; }
+    .provider-card:hover { border-color: var(--teal-mid); }
+    .prov-photo { height: 120px; background: linear-gradient(135deg, var(--teal-light) 0%, #b8dfe0 100%); display: flex; align-items: center; justify-content: center; }
+    .prov-photo svg { width: 44px; height: 44px; stroke: var(--teal-dark); fill: none; stroke-width: 0.8; opacity: 0.4; }
+    .prov-info { padding: 14px; }
+    .prov-name { font-family: var(--font-head); font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .prov-role { font-size: 12px; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
+    .prov-detail { display: flex; align-items: flex-start; gap: 6px; font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+    .prov-detail svg { width: 11px; height: 11px; stroke: var(--teal-dark); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 1px; }
 
     /* Locations section */
     .locations-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
@@ -839,20 +854,66 @@
         <p class="intro">Expert care from providers who put community first. Browse our Primary Care team below to find a provider for you.</p>
         <div class="provider-finder">
           <h3>Find Providers in this Service</h3>
-          <p>Select a location and insurance type to find Primary Care providers accepting new patients near you.</p>
-          <div class="finder-form">
-            <div class="finder-field">
-              <label>Your Location</label>
-              <input type="text" placeholder="Seattle" />
+          <p>Browse our Primary Care providers accepting new patients near you. Need help with coverage? <a class="inline-link" href="insurance-assistance.html">Learn about insurance assistance</a>.</p>
+          <div class="prov-select-wrap">
+            <select id="locationSelect">
+              <option value="">All Locations</option>
+              <option value="International District">International District Medical &amp; Dental Clinic</option>
+              <option value="Holly Park">Holly Park Medical &amp; Dental Clinic</option>
+              <option value="Shoreline">Shoreline Medical &amp; Dental Clinic</option>
+              <option value="Bellevue">Bellevue Medical &amp; Dental Clinic</option>
+              <option value="SOUND Auburn">ICHS at SOUND Auburn</option>
+              <option value="ACRS">ICHS Primary Care Clinic at ACRS</option>
+              <option value="Ron Chew">Ron Chew Healthy Aging &amp; Wellness Center</option>
+              <option value="Seattle World School">Seattle World School Teen Health Center</option>
+              <option value="Highland">Highland Health Center</option>
+              <option value="Mobile Medical">Mobile Medical Clinic</option>
+            </select>
+          </div>
+          <div class="prov-actions">
+            <a class="btn-outline-teal" href="providers.html">View All Providers</a>
+            <button class="btn-crimson" onclick="showServiceProviders()">Find Provider</button>
+          </div>
+          <div id="serviceProviderResults" style="display:none;">
+            <div class="results-label">Results</div>
+            <div class="provider-grid">
+              <div class="provider-card">
+                <div class="prov-photo"><svg viewBox="0 0 100 100"><circle cx="50" cy="35" r="22"/><path d="M15 90c0-19.3 15.7-35 35-35s35 15.7 35 35"/></svg></div>
+                <div class="prov-info">
+                  <div class="prov-name">Aisling Shi Zhao</div>
+                  <div class="prov-role">Physician</div>
+                  <div class="prov-detail"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> International District Medical &amp; Dental Clinic</div>
+                  <div class="prov-detail"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> English, Mandarin</div>
+                </div>
+              </div>
+              <div class="provider-card">
+                <div class="prov-photo"><svg viewBox="0 0 100 100"><circle cx="50" cy="35" r="22"/><path d="M15 90c0-19.3 15.7-35 35-35s35 15.7 35 35"/></svg></div>
+                <div class="prov-info">
+                  <div class="prov-name">Amy Shin</div>
+                  <div class="prov-role">Advanced Practice Provider</div>
+                  <div class="prov-detail"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> International District Medical &amp; Dental Clinic</div>
+                  <div class="prov-detail"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> English, Korean</div>
+                </div>
+              </div>
+              <div class="provider-card">
+                <div class="prov-photo"><svg viewBox="0 0 100 100"><circle cx="50" cy="35" r="22"/><path d="M15 90c0-19.3 15.7-35 35-35s35 15.7 35 35"/></svg></div>
+                <div class="prov-info">
+                  <div class="prov-name">Amy Stevenson</div>
+                  <div class="prov-role">Advanced Practice Provider</div>
+                  <div class="prov-detail"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Holly Park Medical &amp; Dental Clinic</div>
+                  <div class="prov-detail"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> English</div>
+                </div>
+              </div>
+              <div class="provider-card">
+                <div class="prov-photo"><svg viewBox="0 0 100 100"><circle cx="50" cy="35" r="22"/><path d="M15 90c0-19.3 15.7-35 35-35s35 15.7 35 35"/></svg></div>
+                <div class="prov-info">
+                  <div class="prov-name">Binhan Pham</div>
+                  <div class="prov-role">Physician</div>
+                  <div class="prov-detail"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Holly Park Medical &amp; Dental Clinic</div>
+                  <div class="prov-detail"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> English</div>
+                </div>
+              </div>
             </div>
-            <div class="finder-field">
-              <label>Insurance / Slide Fee</label>
-              <select><option>All insurance types</option><option>Medicaid / Apple Health</option><option>Medicare</option><option>Sliding Scale</option><option>Uninsured</option></select>
-            </div>
-            <button class="find-btn">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              Find Provider
-            </button>
           </div>
         </div>
 
@@ -1038,6 +1099,12 @@
     document.getElementById('filterCategory').value = '';
     document.getElementById('serviceSearch').value = '';
     filterServices();
+  }
+
+  // ── SERVICE PROVIDER RESULTS ──
+  function showServiceProviders() {
+    const r = document.getElementById('serviceProviderResults');
+    r.style.display = r.style.display === 'none' ? '' : 'none';
   }
 
   // ── LANG DROPDOWN ──

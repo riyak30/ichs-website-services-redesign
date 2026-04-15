@@ -658,6 +658,23 @@
       .footer-grid { grid-template-columns:1fr 1fr; }
       .mission-since { right:0;bottom:-16px; }
     }
+    /* About page sidebar layout */
+    .about-layout { display:grid; grid-template-columns:220px 1fr; align-items:start; }
+    .about-sidebar { position:sticky; top:0; height:100vh; overflow-y:auto; background:white; border-right:1px solid rgba(0,0,0,0.07); padding:28px 0; z-index:50; scrollbar-width:none; }
+    .about-sidebar::-webkit-scrollbar { display:none; }
+    .about-sidebar-title { font-family:var(--font-head); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--teal-dark); padding:0 20px 10px; border-bottom:1px solid rgba(0,0,0,0.06); margin-bottom:8px; }
+    .about-nav-link { display:block; padding:11px 20px; font-family:var(--font-head); font-size:13px; font-weight:600; color:var(--navy); border-left:3px solid transparent; transition:all 0.15s; text-decoration:none; }
+    .about-nav-link:hover { background:rgba(2,110,112,0.06); color:var(--teal-dark); }
+    .about-nav-link.active { border-left-color:var(--teal-dark); color:var(--teal-dark); background:var(--teal-light); }
+    .about-sidebar-divider { height:1px; background:rgba(0,0,0,0.06); margin:12px 0; }
+    .about-sidebar-cta { margin:16px; background:var(--navy); border-radius:var(--radius-md); padding:18px; }
+    .about-sidebar-cta h6 { font-family:var(--font-head); font-size:13px; font-weight:700; color:white; margin-bottom:6px; }
+    .about-sidebar-cta p { font-size:12px; color:rgba(255,255,255,0.65); line-height:1.5; margin-bottom:14px; }
+    .about-sidebar-cta a { display:block; text-align:center; padding:9px 16px; border-radius:40px; background:var(--crimson); color:white; border:1.5px solid var(--crimson); font-family:var(--font-head); font-size:12px; font-weight:700; transition:background 0.15s; }
+    .about-sidebar-cta a:hover { background:#6b0d2d; }
+
+    @media(max-width:860px) { .about-layout { grid-template-columns:1fr; } .about-sidebar { display:none; } }
+
     @media(max-width:540px) {
       .hero-left { padding:40px 20px; }
       .welcome-list { grid-template-columns:1fr; }
@@ -829,6 +846,27 @@
     </div>
   </div>
 </section>
+
+<div class="about-layout">
+
+<aside class="about-sidebar" aria-label="About page sections">
+  <div class="about-sidebar-title">About ICHS</div>
+  <a class="about-nav-link active" href="#mission">Our Mission</a>
+  <a class="about-nav-link" href="#welcome">Everyone Is Welcome</a>
+  <a class="about-nav-link" href="#history">Our History</a>
+  <a class="about-nav-link" href="#impact">Our Impact</a>
+  <a class="about-nav-link" href="#leadership">Leadership</a>
+  <a class="about-nav-link" href="#accreditation">Accreditation</a>
+  <a class="about-nav-link" href="#join">Get Involved</a>
+  <div class="about-sidebar-divider"></div>
+  <div class="about-sidebar-cta">
+    <h6>Find a Location</h6>
+    <p>13 clinics serving Greater Seattle — find the one closest to you.</p>
+    <a href="location.html">View Locations</a>
+  </div>
+</aside>
+
+<div class="about-sections">
 
 <!-- ══════════════════════════════════════
      MISSION SECTION
@@ -1206,6 +1244,9 @@
   </div>
 </section>
 
+</div><!-- /.about-sections -->
+</div><!-- /.about-layout -->
+
 </main>
 
 <!-- ══════════════════════════════════════
@@ -1274,12 +1315,12 @@
 
   /* ── Sticky in-page nav active state ── */
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.pnav-link');
+  const navLinks = document.querySelectorAll('.about-nav-link');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.pnav-link[href="#${entry.target.id}"]`);
+        const active = document.querySelector(`.about-nav-link[href="#${entry.target.id}"]`);
         if (active) active.classList.add('active');
       }
     });

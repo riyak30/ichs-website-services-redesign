@@ -177,6 +177,17 @@
     .footer-bottom a { color:rgba(255,255,255,0.5); text-decoration:underline; }
     .footer-lang-notice { margin-top:10px; font-size:12px; color:rgba(255,255,255,0.45); border-top:1px solid rgba(255,255,255,0.07); padding-top:12px; }
 
+    /* Address links */
+    .addr-link { color:inherit; text-decoration:underline; text-decoration-color:rgba(0,0,0,0.25); text-underline-offset:2px; }
+    .addr-link:hover { color:var(--teal-dark); text-decoration-color:var(--teal-dark); }
+
+    /* Zip code finder */
+    .fp-input-wrap input { width:100%; padding:11px 14px; border:1.5px solid #d0d8da; border-radius:8px; background:white; font-family:var(--font-body); font-size:14px; color:var(--ink); outline:none; transition:border-color .15s; }
+    .fp-input-wrap input:focus { border-color:var(--teal-dark); box-shadow:0 0 0 3px rgba(2,110,112,0.1); }
+    .zip-find-btn { margin-top:8px; width:100%; padding:9px 14px; background:var(--teal-dark); color:white; border:none; border-radius:8px; font-family:var(--font-head); font-size:13px; font-weight:700; cursor:pointer; }
+    .zip-find-btn:hover { background:#015557; }
+    .dist-badge { display:inline-block; margin-left:6px; background:var(--teal-light); color:var(--teal-dark); border-radius:20px; padding:1px 8px; font-size:11px; font-weight:700; vertical-align:middle; }
+
     /* ═══════════════════════════════
        LOCATION DETAIL PAGE
     ═══════════════════════════════ */
@@ -393,23 +404,19 @@
     <div class="filter-panel" id="filterPanel" role="region" aria-label="Filter options">
       <div class="fp-grid">
         <div class="fp-field">
+          <label class="fp-label" for="filterZip">Find Closest to You</label>
+          <div class="fp-input-wrap">
+            <input type="text" id="filterZip" placeholder="Enter zip code" maxlength="5" pattern="[0-9]*" inputmode="numeric" />
+          </div>
+          <button class="zip-find-btn" onclick="findByZip()">Find Closest</button>
+        </div>
+        <div class="fp-field">
           <label class="fp-label" for="filterSortBy">Sort By</label>
           <div class="fp-select-wrap">
             <select id="filterSortBy" onchange="filterLocations()">
               <option value="default">Default order</option>
               <option value="az">A to Z (Name)</option>
               <option value="za">Z to A (Name)</option>
-            </select>
-          </div>
-        </div>
-        <div class="fp-field">
-          <label class="fp-label" for="filterDistance">Distance</label>
-          <div class="fp-select-wrap">
-            <select id="filterDistance" onchange="filterLocations()">
-              <option value="">Any distance</option>
-              <option value="5">Within 5 miles</option>
-              <option value="10">Within 10 miles</option>
-              <option value="20">Within 20 miles</option>
             </select>
           </div>
         </div>
@@ -467,7 +474,7 @@
         <div class="loc-card-name">International District Medical & Dental Clinic</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>720 8th Ave S, Seattle, WA 98104</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=720+8th+Ave+S,+Seattle,+WA+98104" target="_blank" rel="noopener"><strong>720 8th Ave S, Seattle, WA 98104</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -478,7 +485,7 @@
           <div>Mon–Sat: 8am–5pm</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=720+8th+Ave+S,+Seattle,+WA+98104" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('intl-district')">View Location</a>
         </div>
       </div>
@@ -492,7 +499,7 @@
         <div class="loc-card-name">Holly Park Medical & Dental Clinic</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>3815 S Othello St, Seattle, WA 98118</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=3815+S+Othello+St,+Seattle,+WA+98118" target="_blank" rel="noopener"><strong>3815 S Othello St, Seattle, WA 98118</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -503,7 +510,7 @@
           <div>Mon–Sat: 8am–5pm</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=3815+S+Othello+St,+Seattle,+WA+98118" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('holly-park')">View Location</a>
         </div>
       </div>
@@ -517,7 +524,7 @@
         <div class="loc-card-name">Shoreline Medical & Dental Clinic</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>16549 Aurora Ave N, Shoreline, WA 98133</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=16549+Aurora+Ave+N,+Shoreline,+WA+98133" target="_blank" rel="noopener"><strong>16549 Aurora Ave N, Shoreline, WA 98133</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -528,7 +535,7 @@
           <div>Mon–Fri: 8am–5pm</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=16549+Aurora+Ave+N,+Shoreline,+WA+98133" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('shoreline')">View Location</a>
         </div>
       </div>
@@ -542,7 +549,7 @@
         <div class="loc-card-name">Bellevue Medical & Dental Clinic</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>1020 124th Ave NE, Bellevue, WA 98005</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=1020+124th+Ave+NE,+Bellevue,+WA+98005" target="_blank" rel="noopener"><strong>1020 124th Ave NE, Bellevue, WA 98005</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -553,7 +560,7 @@
           <div>Mon–Fri: 8am–5pm</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=1020+124th+Ave+NE,+Bellevue,+WA+98005" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('bellevue')">View Location</a>
         </div>
       </div>
@@ -567,7 +574,7 @@
         <div class="loc-card-name">ICHS at SOUND Auburn</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>4100 Auburn Way S, Auburn, WA 98001</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=4100+Auburn+Way+S,+Auburn,+WA+98001" target="_blank" rel="noopener"><strong>4100 Auburn Way S, Auburn, WA 98001</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -578,7 +585,7 @@
           <div>Mon–Fri: 8am–5pm</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=4100+Auburn+Way+S,+Auburn,+WA+98001" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('sound-auburn')">View Location</a>
         </div>
       </div>
@@ -592,7 +599,7 @@
         <div class="loc-card-name">ICHS Primary Care Clinic at ACRS</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>3610 Martin Luther King Jr Way S, Seattle, WA 98144</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=3610+Martin+Luther+King+Jr+Way+S,+Seattle,+WA+98144" target="_blank" rel="noopener"><strong>3610 Martin Luther King Jr Way S, Seattle, WA 98144</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -603,7 +610,7 @@
           <div>Mon–Fri: 8am–5pm</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=3610+Martin+Luther+King+Jr+Way+S,+Seattle,+WA+98144" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('acrs')">View Location</a>
         </div>
       </div>
@@ -617,7 +624,7 @@
         <div class="loc-card-name">Ron Chew Healthy Aging & Wellness Center</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>325 Golf Club S, Seattle, WA 98134</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=325+Golf+Club+S,+Seattle,+WA+98134" target="_blank" rel="noopener"><strong>325 Golf Club S, Seattle, WA 98134</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -628,7 +635,7 @@
           <div>Mon–Fri: 8am–5pm</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=325+Golf+Club+S,+Seattle,+WA+98134" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('ron-chew')">View Location</a>
         </div>
       </div>
@@ -642,7 +649,7 @@
         <div class="loc-card-name">ICHS Legacy House</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>403 S Lane St, Seattle, WA 98104</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=403+S+Lane+St,+Seattle,+WA+98104" target="_blank" rel="noopener"><strong>403 S Lane St, Seattle, WA 98104</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -653,7 +660,7 @@
           <div>24 hours / 7 days</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=403+S+Lane+St,+Seattle,+WA+98104" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('legacy-house')">View Location</a>
         </div>
       </div>
@@ -667,7 +674,7 @@
         <div class="loc-card-name">ICHS Meal Program at Bush Asia Center</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>409 Maynard Ave S (Ground Floor), Seattle, WA 98104</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=409+Maynard+Ave+S,+Seattle,+WA+98104" target="_blank" rel="noopener"><strong>409 Maynard Ave S (Ground Floor), Seattle, WA 98104</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -678,7 +685,7 @@
           <div>Mon–Fri: 8am–5pm</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=409+Maynard+Ave+S,+Seattle,+WA+98104" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('meal-program')">View Location</a>
         </div>
       </div>
@@ -692,7 +699,7 @@
         <div class="loc-card-name">Seattle World School Teen Health Center</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>2785 E Union St, Seattle, WA 98122</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=2785+E+Union+St,+Seattle,+WA+98122" target="_blank" rel="noopener"><strong>2785 E Union St, Seattle, WA 98122</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -703,7 +710,7 @@
           <div>School hours</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=2785+E+Union+St,+Seattle,+WA+98122" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('seattle-world-school')">View Location</a>
         </div>
       </div>
@@ -717,7 +724,7 @@
         <div class="loc-card-name">Highland Health Center</div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><strong>23827 Bel-Red Rd, Bellevue, WA 98007</strong></div>
+          <div><a class="addr-link" href="https://maps.google.com/?q=23827+Bel-Red+Rd,+Bellevue,+WA+98007" target="_blank" rel="noopener"><strong>23827 Bel-Red Rd, Bellevue, WA 98007</strong></a></div>
         </div>
         <div class="loc-detail-row">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
@@ -728,7 +735,7 @@
           <div>Mon–Fri: 8am–5pm</div>
         </div>
         <div class="loc-card-actions">
-          <a class="loc-btn loc-btn-outline" href="#">Get Directions</a>
+          <a class="loc-btn loc-btn-outline" href="https://maps.google.com/?q=23827+Bel-Red+Rd,+Bellevue,+WA+98007" target="_blank" rel="noopener">Get Directions</a>
           <a class="loc-btn loc-btn-solid" onclick="showDetail('highland-health')">View Location</a>
         </div>
       </div>
@@ -1271,7 +1278,11 @@
     document.getElementById('detail-bc-name').textContent = loc.name;
     document.getElementById('detail-name').textContent = loc.name;
     document.getElementById('detail-desc').textContent = loc.desc;
-    document.getElementById('detail-addr').innerHTML = loc.address.replace(', ', '<br>').replace(', ', ', ');
+    const addrHtml = loc.address.replace(', ', '<br>').replace(', ', ', ');
+    const mapsUrl = loc.address.startsWith('Multiple') ? null : 'https://maps.google.com/?q=' + encodeURIComponent(loc.address);
+    document.getElementById('detail-addr').innerHTML = mapsUrl
+      ? '<a class="addr-link" href="' + mapsUrl + '" target="_blank" rel="noopener">' + addrHtml + '</a>'
+      : addrHtml;
     document.getElementById('detail-phone').textContent = loc.phone;
     document.getElementById('detail-phone').href = 'tel:' + loc.phone.replace(/[^0-9]/g,'');
     document.getElementById('detail-hours').textContent = loc.hours;
@@ -1302,10 +1313,10 @@
 
   function updateFilterBadge() {
     const sortVal = document.getElementById('filterSortBy').value;
-    const distVal = document.getElementById('filterDistance').value;
+    const zipVal  = document.getElementById('filterZip').value.trim();
     const typeVal = document.getElementById('filterClinicType').value;
     const svcVal  = document.getElementById('filterClinicService').value;
-    const count = [sortVal !== 'default', !!distVal, !!typeVal, !!svcVal].filter(Boolean).length;
+    const count = [sortVal !== 'default', !!zipVal, !!typeVal, !!svcVal].filter(Boolean).length;
     const badge     = document.getElementById('filterBadge');
     const clearLink = document.getElementById('filterClearLink');
     badge.style.display     = count > 0 ? '' : 'none';
@@ -1347,9 +1358,10 @@
   function clearFilters() {
     document.getElementById('locSearch').value = '';
     document.getElementById('filterSortBy').selectedIndex = 0;
-    document.getElementById('filterDistance').selectedIndex = 0;
+    document.getElementById('filterZip').value = '';
     document.getElementById('filterClinicType').selectedIndex = 0;
     document.getElementById('filterClinicService').selectedIndex = 0;
+    document.querySelectorAll('.dist-badge').forEach(b => b.remove());
     filterLocations();
   }
 
@@ -1421,6 +1433,70 @@
     // Recalculate on resize
     window.addEventListener('resize', () => goToPage(current));
   })();
+
+  // ── LOCATION DATA (for map & zip distance) ──
+  const LOCATIONS = [
+    { id:'intl-district',      name:'International District Medical & Dental Clinic',  lat:47.5951, lng:-122.3242, address:'720 8th Ave S, Seattle, WA 98104' },
+    { id:'holly-park',         name:'Holly Park Medical & Dental Clinic',               lat:47.5332, lng:-122.2862, address:'3815 S Othello St, Seattle, WA 98118' },
+    { id:'shoreline',          name:'Shoreline Medical & Dental Clinic',                lat:47.7517, lng:-122.3441, address:'16549 Aurora Ave N, Shoreline, WA 98133' },
+    { id:'bellevue',           name:'Bellevue Medical & Dental Clinic',                 lat:47.6178, lng:-122.1531, address:'1020 124th Ave NE, Bellevue, WA 98005' },
+    { id:'sound-auburn',       name:'ICHS at SOUND Auburn',                             lat:47.2851, lng:-122.1940, address:'4100 Auburn Way S, Auburn, WA 98001' },
+    { id:'acrs',               name:'ICHS Primary Care Clinic at ACRS',                 lat:47.5707, lng:-122.2993, address:'3610 Martin Luther King Jr Way S, Seattle, WA 98144' },
+    { id:'ron-chew',           name:'Ron Chew Healthy Aging & Wellness Center',         lat:47.5756, lng:-122.3283, address:'325 Golf Club S, Seattle, WA 98134' },
+    { id:'legacy-house',       name:'ICHS Legacy House',                                lat:47.5963, lng:-122.3229, address:'403 S Lane St, Seattle, WA 98104' },
+    { id:'meal-program',       name:'ICHS Meal Program at Bush Asia Center',            lat:47.5973, lng:-122.3238, address:'409 Maynard Ave S, Seattle, WA 98104' },
+    { id:'seattle-world-school',name:'Seattle World School Teen Health Center',         lat:47.6109, lng:-122.3019, address:'2785 E Union St, Seattle, WA 98122' },
+    { id:'highland-health',    name:'Highland Health Center',                           lat:47.6215, lng:-122.1313, address:'23827 Bel-Red Rd, Bellevue, WA 98007' },
+  ];
+
+  // ── ZIP CODE → CLOSEST LOCATION ──
+  function haversine(lat1, lng1, lat2, lng2) {
+    const R = 3958.8;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLng/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  async function findByZip() {
+    const zip = document.getElementById('filterZip').value.trim();
+    if (!/^\d{5}$/.test(zip)) { alert('Please enter a valid 5-digit zip code.'); return; }
+    try {
+      const resp = await fetch('https://nominatim.openstreetmap.org/search?postalcode=' + zip + '&countrycodes=us&format=json&limit=1');
+      const data = await resp.json();
+      if (!data.length) { alert('Zip code not found. Please try another.'); return; }
+      const userLat = parseFloat(data[0].lat);
+      const userLng = parseFloat(data[0].lon);
+
+      // Attach distances to cards and add badges
+      document.querySelectorAll('.dist-badge').forEach(b => b.remove());
+      const cards = [...document.querySelectorAll('.loc-card')];
+      cards.forEach(function(card) {
+        const match = (card.getAttribute('onclick') || '').match(/showDetail\('([^']+)'\)/);
+        const locId = match ? match[1] : null;
+        const loc = LOCATIONS.find(l => l.id === locId);
+        if (loc) {
+          const dist = haversine(userLat, userLng, loc.lat, loc.lng);
+          card.dataset.distance = dist;
+          const badge = document.createElement('span');
+          badge.className = 'dist-badge';
+          badge.textContent = dist.toFixed(1) + ' mi';
+          card.querySelector('.loc-card-name').appendChild(badge);
+        } else {
+          card.dataset.distance = 9999;
+        }
+      });
+
+      // Sort by distance
+      const container = document.getElementById('locCards');
+      [...cards].sort((a, b) => parseFloat(a.dataset.distance||9999) - parseFloat(b.dataset.distance||9999))
+                .forEach(c => container.appendChild(c));
+
+      updateFilterBadge();
+    } catch(e) {
+      alert('Could not look up zip code. Please check your connection and try again.');
+    }
+  }
 </script>
 </body>
 </html>
