@@ -103,6 +103,8 @@ export default function ServiceDetailPage() {
                   borderLeft: openGroups.includes(gi) ? '3px solid var(--teal-dark)' : '3px solid transparent',
                   transition: 'all 0.15s',
                 }}
+                onMouseEnter={e => { if (!openGroups.includes(gi)) { e.currentTarget.style.background = 'rgba(2,110,112,0.1)'; e.currentTarget.style.color = 'var(--teal-dark)' } }}
+                onMouseLeave={e => { if (!openGroups.includes(gi)) { e.currentTarget.style.background = 'rgba(2,110,112,0.04)'; e.currentTarget.style.color = 'var(--navy)' } }}
               >
                 {group.label}
                 <span style={{ fontSize: 10, color: 'var(--muted)', transition: 'transform 0.2s', transform: openGroups.includes(gi) ? 'rotate(180deg)' : 'none' }}>▾</span>
@@ -120,7 +122,10 @@ export default function ServiceDetailPage() {
                         borderLeft: item.id === serviceId ? '3px solid var(--teal-dark)' : '3px solid transparent',
                         background: item.id === serviceId ? 'rgba(207,235,234,0.3)' : 'transparent',
                         fontWeight: item.id === serviceId ? 600 : 400,
+                        transition: 'background 0.15s, color 0.15s',
                       }}
+                      onMouseEnter={e => { if (item.id !== serviceId) { e.currentTarget.style.background = 'rgba(2,110,112,0.06)'; e.currentTarget.style.color = 'var(--teal-dark)' } }}
+                      onMouseLeave={e => { if (item.id !== serviceId) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--muted)' } }}
                     >
                       {item.name}
                     </Link>
@@ -223,12 +228,19 @@ export default function ServiceDetailPage() {
               <span style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 10, color: 'var(--muted)', pointerEvents: 'none' }}>▼</span>
             </div>
             <div style={{ display: 'flex', gap: 12 }}>
-              <Link to="/providers" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '11px 22px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, cursor: 'pointer', background: 'transparent', color: 'var(--teal-dark)', border: '2px solid var(--teal-dark)', textDecoration: 'none' }}>
+              <Link
+                to="/providers"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '11px 22px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, cursor: 'pointer', background: 'transparent', color: 'var(--teal-dark)', border: '2px solid var(--teal-dark)', textDecoration: 'none', transition: 'background 0.15s, color 0.15s' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'var(--teal-dark)'; e.currentTarget.style.color = 'white' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--teal-dark)' }}
+              >
                 View All Providers
               </Link>
               <button
                 onClick={() => setShowProviders(v => !v)}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '11px 22px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, cursor: 'pointer', background: 'var(--crimson)', color: 'white', border: '2px solid var(--crimson)' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '11px 22px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, cursor: 'pointer', background: 'var(--crimson)', color: 'white', border: '2px solid var(--crimson)', transition: 'background 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.background = '#6b0d2d'}
+                onMouseLeave={e => e.currentTarget.style.background = 'var(--crimson)'}
               >
                 {showProviders ? 'Hide Providers' : 'Find Provider'}
               </button>

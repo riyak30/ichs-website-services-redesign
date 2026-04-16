@@ -40,6 +40,8 @@ const SLIDES = [
       { label: 'Call (425) 373-3000', href: 'tel:4253733000', cls: 'btn btn-primary' },
       { label: 'Find the Clinic →', to: '/location/bellevue', cls: 'btn btn-outline-white' },
     ],
+    image: '/img/bell-location.jpeg',
+    imageAlt: 'Bellevue Clinic Location',
     rightClass: 'hero-slide-right--announce',
   },
 ]
@@ -250,13 +252,22 @@ export default function HomePage() {
             ].map(btn => (
               btn.to ? (
                 <Link key={btn.label} to={btn.to} style={{ textDecoration: 'none', flex: '1 1 140px' }}>
-                  <div style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: 'var(--radius-md)', padding: '16px 14px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, cursor: 'pointer', color: 'white', textAlign: 'center' }}>
+                  <div
+                    style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: 'var(--radius-md)', padding: '16px 14px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, cursor: 'pointer', color: 'white', textAlign: 'center', transition: 'background 0.15s, border-color 0.15s' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.22)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.6)' }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)' }}
+                  >
                     <div style={{ width: 26, height: 26 }}>{btn.icon}</div>
                     <span style={{ fontFamily: 'var(--font-head)', fontSize: 13, fontWeight: 700 }}>{btn.label}</span>
                   </div>
                 </Link>
               ) : (
-                <div key={btn.label} style={{ flex: '1 1 140px', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: 'var(--radius-md)', padding: '16px 14px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, cursor: 'pointer', color: 'white', textAlign: 'center' }}>
+                <div
+                  key={btn.label}
+                  style={{ flex: '1 1 140px', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: 'var(--radius-md)', padding: '16px 14px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, cursor: 'pointer', color: 'white', textAlign: 'center', transition: 'background 0.15s, border-color 0.15s' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.22)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.6)' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)' }}
+                >
                   <div style={{ width: 26, height: 26 }}>{btn.icon}</div>
                   <span style={{ fontFamily: 'var(--font-head)', fontSize: 13, fontWeight: 700 }}>{btn.label}</span>
                 </div>
@@ -278,12 +289,12 @@ export default function HomePage() {
               <div style={{ background: 'white', border: '1.5px solid rgba(0,0,0,0.08)', borderRadius: 'var(--radius-md)', padding: '20px 22px' }}>
                 <h4 style={{ fontFamily: 'var(--font-head)', fontSize: 15, fontWeight: 700, color: 'var(--teal-dark)', marginBottom: 6 }}>For New Patients,</h4>
                 <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.5, marginBottom: 10 }}>Appointment-making, services, insurance questions,</p>
-                <a href="tel:2067883700" style={{ color: 'var(--crimson)', fontWeight: 700, fontSize: 13, fontFamily: 'var(--font-head)' }}>Please call (206) 788-3700</a>
+                <a href="tel:2067883700" style={{ color: 'var(--crimson)', fontWeight: 700, fontSize: 13, fontFamily: 'var(--font-head)', textDecoration: 'none' }} onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'} onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}>Please call (206) 788-3700</a>
               </div>
               <div style={{ background: 'white', border: '1.5px solid rgba(0,0,0,0.08)', borderRadius: 'var(--radius-md)', padding: '20px 22px' }}>
                 <h4 style={{ fontFamily: 'var(--font-head)', fontSize: 15, fontWeight: 700, color: 'var(--navy)', marginBottom: 6 }}>For Returning Patients,</h4>
                 <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.5, marginBottom: 10 }}>Please call the clinic number.</p>
-                <Link to="/location" style={{ color: 'var(--crimson)', fontWeight: 700, fontSize: 13, fontFamily: 'var(--font-head)' }}>View all Locations</Link>
+                <Link to="/location" style={{ color: 'var(--crimson)', fontWeight: 700, fontSize: 13, fontFamily: 'var(--font-head)', textDecoration: 'none' }} onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'} onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}>View all Locations</Link>
               </div>
             </div>
             <div style={{ marginTop: 20 }}>

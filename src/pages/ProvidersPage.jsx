@@ -125,7 +125,9 @@ export default function ProvidersPage() {
           <button
             onClick={() => setFilterOpen(o => !o)}
             aria-expanded={filterOpen}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.6)', borderRadius: 40, padding: '10px 22px', fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, color: 'white', cursor: 'pointer', flexShrink: 0 }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.6)', borderRadius: 40, padding: '10px 22px', fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, color: 'white', cursor: 'pointer', flexShrink: 0, transition: 'background 0.15s' }}
+            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.28)'}
+            onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: 15, height: 15 }}>
               <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
@@ -226,7 +228,9 @@ export default function ProvidersPage() {
               {hasMore && (
                 <button
                   onClick={() => setShowAll(true)}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 36px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 15, fontWeight: 700, cursor: 'pointer', background: 'var(--teal-dark)', color: 'white', border: '2px solid var(--teal-dark)' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 36px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 15, fontWeight: 700, cursor: 'pointer', background: 'var(--teal-dark)', color: 'white', border: '2px solid var(--teal-dark)', transition: 'background 0.15s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#015557'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'var(--teal-dark)'}
                 >
                   View More Providers
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: 16, height: 16 }}>
@@ -237,7 +241,9 @@ export default function ProvidersPage() {
               {showAll && filtered.length > INITIAL_COUNT && (
                 <button
                   onClick={() => setShowAll(false)}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 36px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 15, fontWeight: 700, cursor: 'pointer', background: 'transparent', color: 'var(--teal-dark)', border: '2px solid var(--teal-dark)' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 36px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 15, fontWeight: 700, cursor: 'pointer', background: 'transparent', color: 'var(--teal-dark)', border: '2px solid var(--teal-dark)', transition: 'background 0.15s, color 0.15s' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'var(--teal-dark)'; e.currentTarget.style.color = 'white' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--teal-dark)' }}
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: 16, height: 16, transform: 'rotate(180deg)' }}>
                     <path d="M5 12h14M12 5l7 7-7 7"/>

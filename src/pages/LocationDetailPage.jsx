@@ -382,13 +382,17 @@ export default function LocationDetailPage() {
           <div style={{ display: 'flex', gap: 12 }}>
             <Link
               to="/providers"
-              style={{ display: 'inline-flex', alignItems: 'center', padding: '11px 22px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, background: 'transparent', color: 'var(--teal-dark)', border: '2px solid var(--teal-dark)', textDecoration: 'none' }}
+              style={{ display: 'inline-flex', alignItems: 'center', padding: '11px 22px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, background: 'transparent', color: 'var(--teal-dark)', border: '2px solid var(--teal-dark)', textDecoration: 'none', transition: 'background 0.15s, color 0.15s' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--teal-dark)'; e.currentTarget.style.color = 'white' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--teal-dark)' }}
             >
               View All Providers
             </Link>
             <button
               onClick={() => setShowProv(v => !v)}
-              style={{ display: 'inline-flex', alignItems: 'center', padding: '11px 22px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, background: 'var(--crimson)', color: 'white', border: '2px solid var(--crimson)', cursor: 'pointer' }}
+              style={{ display: 'inline-flex', alignItems: 'center', padding: '11px 22px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, background: 'var(--crimson)', color: 'white', border: '2px solid var(--crimson)', cursor: 'pointer', transition: 'background 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.background = '#6b0d2d'}
+              onMouseLeave={e => e.currentTarget.style.background = 'var(--crimson)'}
             >
               {showProv ? 'Hide Providers' : 'Find Provider'}
             </button>

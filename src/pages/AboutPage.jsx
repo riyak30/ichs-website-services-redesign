@@ -129,10 +129,20 @@ export default function AboutPage() {
           </div>
           {/* CTA Buttons */}
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <a href="#mission" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, background: 'var(--crimson)', color: 'white', border: '2px solid var(--crimson)', textDecoration: 'none' }}>
+            <a
+              href="#mission"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, background: 'var(--crimson)', color: 'white', border: '2px solid var(--crimson)', textDecoration: 'none', transition: 'background 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.background = '#6b0d2d'}
+              onMouseLeave={e => e.currentTarget.style.background = 'var(--crimson)'}
+            >
               Learn Our Mission
             </a>
-            <Link to="/location" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '13px 26px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, background: 'transparent', color: 'var(--navy)', border: '2px solid rgba(7,44,56,0.4)', textDecoration: 'none' }}>
+            <Link
+              to="/location"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '13px 26px', borderRadius: 40, fontFamily: 'var(--font-head)', fontSize: 14, fontWeight: 700, background: 'transparent', color: 'var(--navy)', border: '2px solid rgba(7,44,56,0.4)', textDecoration: 'none', transition: 'background 0.15s, color 0.15s, border-color 0.15s' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = 'white'; e.currentTarget.style.borderColor = 'var(--navy)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--navy)'; e.currentTarget.style.borderColor = 'rgba(7,44,56,0.4)' }}
+            >
               Find a Location
             </Link>
           </div>
@@ -311,14 +321,24 @@ export default function AboutPage() {
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
                 {LEADERS.map(leader => (
-                  <article key={leader.name} style={{ background: 'white', borderRadius: 'var(--radius-lg)', border: '1.5px solid rgba(0,0,0,0.07)', overflow: 'hidden' }}>
+                  <article
+                    key={leader.name}
+                    style={{ background: 'white', borderRadius: 'var(--radius-lg)', border: '1.5px solid rgba(0,0,0,0.07)', overflow: 'hidden', transition: 'border-color 0.15s, box-shadow 0.15s, transform 0.15s' }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--teal-mid)'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(2,110,112,0.13)'; e.currentTarget.style.transform = 'translateY(-3px)' }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'none' }}
+                  >
                     <div style={{ height: 192, background: leader.grad, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <span style={{ fontFamily: 'var(--font-head)', fontSize: 52, fontWeight: 700, color: 'rgba(255,255,255,0.7)', letterSpacing: -2 }}>{leader.initials}</span>
                     </div>
                     <div style={{ padding: 20 }}>
                       <div style={{ fontFamily: 'var(--font-head)', fontSize: 16, fontWeight: 700, color: 'var(--navy)', marginBottom: 4 }}>{leader.name}</div>
                       <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.4 }}>{leader.title}</div>
-                      <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-head)', fontSize: 12, fontWeight: 700, color: 'var(--teal-dark)', marginTop: 10, borderBottom: '1.5px solid var(--teal-dark)', textDecoration: 'none' }}>
+                      <a
+                        href="#"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-head)', fontSize: 12, fontWeight: 700, color: 'var(--teal-dark)', marginTop: 10, borderBottom: '1.5px solid var(--teal-dark)', textDecoration: 'none', transition: 'color 0.15s, border-color 0.15s' }}
+                        onMouseEnter={e => { e.currentTarget.style.color = '#015557'; e.currentTarget.style.borderBottomColor = '#015557' }}
+                        onMouseLeave={e => { e.currentTarget.style.color = 'var(--teal-dark)'; e.currentTarget.style.borderBottomColor = 'var(--teal-dark)' }}
+                      >
                         Read Bio →
                       </a>
                     </div>
