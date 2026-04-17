@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 const LANGUAGES = [
   { flag: '🇺🇸', en: 'English', native: null },
@@ -17,7 +18,11 @@ const LANGUAGES = [
 
 export default function UtilityBar() {
   const [open, setOpen] = useState(false)
+  const [search, setSearch] = useState('')
   const btnRef = useRef(null)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     function handleClick(e) {
@@ -28,6 +33,21 @@ export default function UtilityBar() {
     document.addEventListener('click', handleClick)
     return () => document.removeEventListener('click', handleClick)
   }, [])
+
+  useEffect(() => {
+    if (location.pathname === '/search') {
+      setSearch(searchParams.get('q') || '')
+      return
+    }
+    setSearch('')
+  }, [location.pathname, searchParams])
+
+  function handleSearchSubmit(event) {
+    event.preventDefault()
+    const query = search.trim()
+    if (!query) return
+    navigate(`/search?q=${encodeURIComponent(query)}`)
+  }
 
   return (
     <div className="util-bar">
@@ -93,13 +113,20 @@ export default function UtilityBar() {
       </div>
 
       <div className="util-right">
-        <div className="util-search-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-            <circle cx="11" cy="11" r="8"/>
-            <path d="m21 21-4.35-4.35"/>
-          </svg>
-          <input type="text" placeholder="Search" />
-        </div>
+        <form className="util-search-wrap" onSubmit={handleSearchSubmit}>
+          <button type="submit" className="util-search-btn" aria-label="Search site">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+          </button>
+          <input
+            type="text"
+            placeholder="Search site"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </form>
         <a className="util-cta" href="https://wamt.myonlinechart.org" target="_blank" rel="noopener noreferrer">MyChart Login</a>
         <a className="util-cta" href="#">Donate</a>
       </div>

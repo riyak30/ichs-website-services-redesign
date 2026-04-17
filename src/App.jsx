@@ -9,6 +9,7 @@ import AboutPage from './pages/AboutPage.jsx'
 import ProvidersPage from './pages/ProvidersPage.jsx'
 import ProviderDetailPage from './pages/ProviderDetailPage.jsx'
 import CareersPage from './pages/CareersPage.jsx'
+import SearchResultsPage from './pages/SearchResultsPage.jsx'
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/providers" element={<ProvidersPage />} />
         <Route path="/providers/:providerId" element={<ProviderDetailPage />} />
         <Route path="/careers" element={<CareersPage />} />
+        <Route path="/search" element={<SearchResultsPage />} />
       </Route>
     </Routes>
   )

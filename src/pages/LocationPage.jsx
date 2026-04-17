@@ -1,16 +1,39 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import locationsData from '../data/locationsData.js'
 import NewsletterStrip from '../components/NewsletterStrip.jsx'
+import LocationsMap from '../components/LocationsMap.jsx'
+import { geocodeZipCode, hasGoogleMapsApiKey } from '../lib/googleMaps.js'
+
+function haversineMiles(a, b) {
+  const toRad = value => (value * Math.PI) / 180
+  const earthRadiusMiles = 3958.8
+  const dLat = toRad(b.lat - a.lat)
+  const dLng = toRad(b.lng - a.lng)
+  const lat1 = toRad(a.lat)
+  const lat2 = toRad(b.lat)
+  const sinLat = Math.sin(dLat / 2)
+  const sinLng = Math.sin(dLng / 2)
+  const h = sinLat * sinLat + Math.cos(lat1) * Math.cos(lat2) * sinLng * sinLng
+  return 2 * earthRadiusMiles * Math.asin(Math.sqrt(h))
+}
 
 export default function LocationPage() {
-  const [search, setSearch] = useState('')
+  const [query, setQuery] = useState('')
+  const [zipError, setZipError] = useState('')
+  const [searchedZip, setSearchedZip] = useState('')
+  const [searchedZipLabel, setSearchedZipLabel] = useState('')
+  const [searchedPoint, setSearchedPoint] = useState(null)
+  const [isFindingNearest, setIsFindingNearest] = useState(false)
+  const [selectedLocationId, setSelectedLocationId] = useState(() => {
+    const firstMappable = locationsData.find(loc => loc.coordinates)
+    return firstMappable ? firstMappable.id : ''
+  })
   const [filterOpen, setFilterOpen] = useState(false)
   const [clinicType, setClinicType] = useState('')
   const [sortBy, setSortBy] = useState('default')
   const { hash } = useLocation()
 
-  // Scroll to hash on mount
   useEffect(() => {
     if (hash) {
       const id = hash.replace('#', '')
@@ -22,18 +45,83 @@ export default function LocationPage() {
   }, [hash])
 
   const activeCount = [clinicType, sortBy !== 'default' ? sortBy : ''].filter(Boolean).length
+  const mappableLocations = useMemo(
+    () => locationsData.filter(loc => loc.coordinates),
+    []
+  )
+  const selectedLocation = locationsData.find(loc => loc.id === selectedLocationId) || mappableLocations[0] || null
+  const selectedDistance = searchedPoint && selectedLocation?.coordinates
+    ? haversineMiles(searchedPoint, selectedLocation.coordinates)
+    : null
 
   function clearAll() {
-    setSearch('')
+    setQuery('')
+    setZipError('')
+    setSearchedZip('')
+    setSearchedZipLabel('')
+    setSearchedPoint(null)
     setClinicType('')
     setSortBy('default')
     setFilterOpen(false)
   }
 
+  async function handleNearestSearch(event) {
+    event.preventDefault()
+    const normalizedZip = query.trim().slice(0, 5)
+
+    if (!/^\d{5}$/.test(normalizedZip)) {
+      setZipError('Enter a valid 5-digit ZIP code to find the nearest clinic.')
+      setSearchedZip('')
+      setSearchedZipLabel('')
+      setSearchedPoint(null)
+      return
+    }
+
+    if (!hasGoogleMapsApiKey()) {
+      setZipError('Add a Google Maps API key to enable nationwide ZIP code lookup.')
+      setSearchedZip('')
+      setSearchedZipLabel('')
+      setSearchedPoint(null)
+      return
+    }
+
+    setIsFindingNearest(true)
+
+    try {
+      const zipPoint = await geocodeZipCode(normalizedZip)
+      const nearest = mappableLocations.reduce((closest, loc) => {
+        const distance = haversineMiles(zipPoint, loc.coordinates)
+        if (!closest || distance < closest.distance) {
+          return { id: loc.id, distance }
+        }
+        return closest
+      }, null)
+
+      if (!nearest) {
+        throw new Error('No fixed-address clinics are available for nearest-location matching.')
+      }
+
+      setZipError('')
+      setSearchedZip(normalizedZip)
+      setSearchedZipLabel(zipPoint.formattedAddress)
+      setSearchedPoint({ lat: zipPoint.lat, lng: zipPoint.lng })
+      setSelectedLocationId(nearest.id)
+    } catch (error) {
+      setZipError(error.message || 'Unable to find the nearest clinic for that ZIP code.')
+      setSearchedZip('')
+      setSearchedZipLabel('')
+      setSearchedPoint(null)
+    } finally {
+      setIsFindingNearest(false)
+    }
+  }
+
   let filtered = locationsData.filter(loc => {
-    const matchSearch = !search ||
-      loc.name.toLowerCase().includes(search.toLowerCase()) ||
-      loc.address.toLowerCase().includes(search.toLowerCase())
+    const normalizedQuery = query.toLowerCase().trim()
+    const isZipQuery = /^\d{5}$/.test(normalizedQuery)
+    const matchSearch = !normalizedQuery || isZipQuery ||
+      loc.name.toLowerCase().includes(normalizedQuery) ||
+      loc.address.toLowerCase().includes(normalizedQuery)
     const matchType = !clinicType || loc.types.some(t => t.toLowerCase().includes(clinicType.toLowerCase()))
     return matchSearch && matchType
   })
@@ -43,28 +131,34 @@ export default function LocationPage() {
 
   return (
     <>
-      {/* ── HERO ── */}
-      <div style={{ background: 'var(--teal-dark)', padding: '48px 40px', textAlign: 'center' }}>
+      <div style={{ background: 'var(--teal-dark)', padding: '48px 40px 34px', textAlign: 'center' }}>
         <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 36, fontWeight: 700, color: 'white', marginBottom: 8 }}>Find a Location</h1>
         <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, marginBottom: 24 }}>
           ICHS has 13 clinic sites across Greater Seattle, Bellevue, and Auburn.
         </p>
 
-        {/* Search row */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, maxWidth: 660, margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', background: 'white', borderRadius: 40, padding: '10px 20px', gap: 10, flex: 1, boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, maxWidth: 1160, margin: '0 auto' }}>
+          <form onSubmit={handleNearestSearch} style={{ display: 'flex', alignItems: 'center', background: 'white', borderRadius: 40, padding: '10px 20px', gap: 10, flex: 1, boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" strokeWidth="2" style={{ width: 16, height: 16, flexShrink: 0 }}>
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
             </svg>
             <input
               id="locSearch"
               type="text"
-              placeholder="Search by name or address..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
+              placeholder="Search by name or address, or enter your ZIP code to find nearest..."
+              value={query}
+              onChange={e => setQuery(e.target.value)}
               style={{ border: 'none', outline: 'none', fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--ink)', flex: 1, background: 'transparent' }}
             />
-          </div>
+            <button
+              type="submit"
+              disabled={isFindingNearest}
+              style={{ fontFamily: 'var(--font-head)', fontSize: 12, fontWeight: 700, color: 'var(--teal-dark)', background: 'rgba(2,110,112,0.08)', border: 'none', borderRadius: 999, padding: '8px 14px', cursor: isFindingNearest ? 'wait' : 'pointer', flexShrink: 0, opacity: isFindingNearest ? 0.75 : 1 }}
+            >
+              {isFindingNearest ? 'Finding...' : 'Find Nearest'}
+            </button>
+          </form>
+
           <button
             onClick={() => setFilterOpen(o => !o)}
             aria-expanded={filterOpen}
@@ -81,14 +175,41 @@ export default function LocationPage() {
             )}
             <span style={{ fontSize: 10, transition: 'transform 0.2s', transform: filterOpen ? 'rotate(180deg)' : 'none' }}>▾</span>
           </button>
-          {(activeCount > 0 || search) && (
+
+          {(activeCount > 0 || query) && (
             <button onClick={clearAll} style={{ fontFamily: 'var(--font-head)', fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.85)', cursor: 'pointer', background: 'none', border: 'none', textDecoration: 'underline', padding: 4, flexShrink: 0 }}>
               Clear All
             </button>
           )}
         </div>
 
-        {/* Filter panel */}
+        {(zipError || selectedLocation) && (
+          <div style={{ maxWidth: 1160, margin: '10px auto 0', textAlign: 'left' }}>
+            {zipError ? (
+              <div style={{ fontSize: 13, color: '#ffe6ee', fontWeight: 600 }}>{zipError}</div>
+            ) : selectedLocation ? (
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.84)' }}>
+                {searchedZip ? (
+                  <>
+                    Closest to ZIP <strong>{searchedZip}</strong>{searchedZipLabel ? ` (${searchedZipLabel})` : ''}: <strong>{selectedLocation.name}</strong>
+                    {selectedDistance !== null ? `, ${selectedDistance.toFixed(1)} miles away` : ''}
+                  </>
+                ) : (
+                  <>Showing pinned ICHS sites on the map. Current focus: <strong>{selectedLocation.name}</strong></>
+                )}
+              </div>
+            ) : null}
+          </div>
+        )}
+
+        <div style={{ maxWidth: 1160, margin: '20px auto 0' }}>
+          <LocationsMap
+            locations={mappableLocations}
+            selectedLocationId={selectedLocationId}
+            onSelectLocation={setSelectedLocationId}
+          />
+        </div>
+
         {filterOpen && (
           <div style={{ maxWidth: 660, margin: '16px auto 0', background: 'white', borderRadius: 14, padding: '24px 28px 20px', boxShadow: '0 8px 32px rgba(7,44,56,0.22)', textAlign: 'left' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
@@ -127,7 +248,6 @@ export default function LocationPage() {
         )}
       </div>
 
-      {/* ── LOCATION CARDS ── */}
       <div style={{ background: 'var(--teal-light)', padding: '40px 40px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <p style={{ fontFamily: 'var(--font-head)', fontSize: 13, color: 'var(--muted)', marginBottom: 24 }}>
@@ -139,9 +259,26 @@ export default function LocationPage() {
                 key={loc.id}
                 id={loc.id}
                 to={`/location/${loc.id}`}
-                style={{ display: 'block', background: 'white', borderRadius: 'var(--radius-lg)', border: '1.5px solid rgba(0,0,0,0.07)', overflow: 'hidden', transition: 'border-color 0.15s, box-shadow 0.15s, transform 0.15s', textDecoration: 'none', cursor: 'pointer' }}
+                style={{
+                  display: 'block',
+                  background: 'white',
+                  borderRadius: 'var(--radius-lg)',
+                  border: loc.id === selectedLocationId ? '1.5px solid var(--crimson)' : '1.5px solid rgba(0,0,0,0.07)',
+                  overflow: 'hidden',
+                  transition: 'border-color 0.15s, box-shadow 0.15s, transform 0.15s',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  boxShadow: loc.id === selectedLocationId ? '0 8px 28px rgba(135,17,57,0.12)' : 'none',
+                }}
+                onClick={() => {
+                  if (loc.coordinates) setSelectedLocationId(loc.id)
+                }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--teal-mid)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(2,110,112,0.12)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'none' }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = loc.id === selectedLocationId ? 'var(--crimson)' : 'rgba(0,0,0,0.07)'
+                  e.currentTarget.style.boxShadow = loc.id === selectedLocationId ? '0 8px 28px rgba(135,17,57,0.12)' : 'none'
+                  e.currentTarget.style.transform = 'none'
+                }}
               >
                 <div style={{ height: 180, overflow: 'hidden', background: 'linear-gradient(135deg, var(--teal-light) 0%, #b8dfe0 100%)' }}>
                   <img
