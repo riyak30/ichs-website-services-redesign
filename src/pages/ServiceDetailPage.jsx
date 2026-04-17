@@ -42,7 +42,7 @@ export default function ServiceDetailPage() {
 
   const relatedLocations = locationsData.filter(loc =>
     loc.servicesOffered.includes(serviceId)
-  ).slice(0, 3)
+  )
 
   return (
     <>
